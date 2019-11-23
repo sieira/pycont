@@ -4,3 +4,4 @@
 .*.swp
 .*.swo
 build/requirements.local.txt
+../.DS_Store

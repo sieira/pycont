@@ -1,0 +1,38 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$Afjsi74BAvLo$vk+Tc+Bd2wHDaGIIztFGCTjiOF+Izr/0glK3HkNbhQE=",
+        "last_login": "2019-11-23T16:53:23.412Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@spacebar.fr",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-11-23T16:53:09.752Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$UyBkydGJBYor$FHzPG6hBYIoFWGma7tc7wuk3HZ45+JL3sAvjTNMMAmU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "sieira",
+        "first_name": "Luis",
+        "last_name": "Sieira",
+        "email": "luis.sieira@pycont.net",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2019-11-23T16:56:15Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

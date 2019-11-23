@@ -23,3 +23,7 @@ jobs:
       script: docker-compose run pycont pycodestyle --max-line-length=99 pycont
     - name: "Pydocstyle"
       script: docker-compose run pycont pydocstyle pycont
+    - name: "Unit testing"
+      script:
+        - docker-compose up -d mariadb-test
+        - docker-compose run pycont-test ./manage.py test tests

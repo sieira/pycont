@@ -8,6 +8,32 @@ networks:
         - subnet: 172.28.0.0/16
 
 services:
+  mariadb:
+    image: mariadb:10
+    container_name: pycont-mariadb
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: pycont
+      MYSQL_USER: pycont
+      MYSQL_PASSWORD: pycont
+    restart: on-failure
+    networks:
+      - pycont-net
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  mariadb-test:
+    image: mariadb:10
+    container_name: pycont-mariadb-test
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: test_pycont
+      MYSQL_USER: pycont
+      MYSQL_PASSWORD: pycont
+    restart: on-failure
+    networks:
+      - pycont-net
+
   pycont-base:
     build:
       context: .
@@ -35,23 +61,28 @@ services:
     restart: always
     stdin_open: true
     tty: true
-    user: ${UID}:${GID}
     volumes:
       - .:/usr/src/app/
 
-  mariadb:
-    image: mariadb:10
-    container_name: pycont-mariadb
+  pycont-test:
+    build:
+      context: .
+      dockerfile: build/Dockerfile.dev
+    command: /bin/false
+    container_name: pycont-test
+    depends_on:
+      - pycont-base
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_DATABASE: pycont
-      MYSQL_USER: pycont
-      MYSQL_PASSWORD: pycont
-    restart: on-failure
+      DJANGO_DEBUG: 1
+      DJANGO_SECRET_KEY: django-secret-key
+      MYSQL_DB_HOST: mariadb-test
+    image: pycont-dev
     networks:
       - pycont-net
+    stdin_open: true
+    tty: true
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - .:/usr/src/app/
 
 volumes:
   mariadb_data:
