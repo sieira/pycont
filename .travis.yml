@@ -16,11 +16,11 @@ install:
 
 jobs:
   include:
-    - stage: "Linting"
+    - stage: "Testing"
       name: "Pylint"
       script: docker-compose run pycont pylint --load-plugins=pylint_django pycont
     - name: "Pycodestyle"
-      script: docker-compose run pycont pycodestyle --max-line-length=99 pycont
+      script: docker-compose run pycont pycodestyle pycont
     - name: "Pydocstyle"
       script: docker-compose run pycont pydocstyle pycont
     - name: "Unit testing"
