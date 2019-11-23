@@ -81,6 +81,7 @@ services:
       - pycont-net
     stdin_open: true
     tty: true
+    user: ${UID}:${GID}
     volumes:
       - .:/usr/src/app/
 
