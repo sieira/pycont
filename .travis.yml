@@ -26,4 +26,4 @@ jobs:
     - name: "Unit testing"
       script:
         - docker-compose up -d mariadb-test
-        - docker-compose run pycont-test ./manage.py test tests
+        - docker-compose run pycont-test sh -c "./wait_for_mysql.py &&./manage.py test tests --noinput"
