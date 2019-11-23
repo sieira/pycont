@@ -1,0 +1,29 @@
+FROM python:3.8-alpine
+
+RUN addgroup -g 1000 web && adduser -u 1000 -G web -D web
+
+COPY build/requirements.*.txt ./
+
+RUN set -ex; \
+    BUILD_DEPS=" \
+        gcc \
+        libffi-dev \
+        libressl-dev \
+        libxml2-dev \
+        linux-headers \
+        make \
+        mariadb-dev \
+        musl-dev \
+        python3-dev \
+        xmlsec-dev \
+        zlib-dev \
+    "; \
+    RUN_DEPS="mariadb-connector-c"; \
+    apk add --no-cache --virtual .build-deps $BUILD_DEPS; \
+    pip install --no-cache-dir -c requirements.constraint.txt -r requirements.base.txt; \
+    rm requirements.*.txt; \
+    apk add --no-cache $RUN_DEPS $EXTRA_RUN_DEPS; \
+    apk del .build-deps
+
+RUN mkdir -p /usr/src/app && chown web:web /usr/src/app
+WORKDIR /usr/src/app

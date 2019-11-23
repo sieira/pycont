@@ -1,0 +1,6 @@
+*.coverage
+*.pyc
+*.pyo
+.*.swp
+.*.swo
+build/requirements.local.txt

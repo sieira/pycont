@@ -1,0 +1,57 @@
+version: '3.7'
+
+networks:
+  pycont-net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
+
+services:
+  pycont-base:
+    build:
+      context: .
+      dockerfile: build/Dockerfile.base
+    command: /bin/false
+    container_name: pycont-base
+    image: pycont-base
+
+  pycont:
+    build:
+      context: .
+      dockerfile: build/Dockerfile.dev
+    command: python manage.py runserver 0.0.0.0:8080
+    container_name: pycont
+    depends_on:
+      - pycont-base
+    environment:
+      DJANGO_DEBUG: 1
+      DJANGO_SECRET_KEY: django-secret-key
+    image: pycont-dev
+    networks:
+      - pycont-net
+    ports:
+      - "8080:8080"
+    restart: always
+    stdin_open: true
+    tty: true
+    user: ${UID}:${GID}
+    volumes:
+      - .:/usr/src/app/
+
+  mariadb:
+    image: mariadb:10
+    container_name: pycont-mariadb
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: pycont
+      MYSQL_USER: pycont
+      MYSQL_PASSWORD: pycont
+    restart: on-failure
+    networks:
+      - pycont-net
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:

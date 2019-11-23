@@ -1,0 +1,25 @@
+env:
+  DOCKER_COMPOSE_VERSION: 1.24.1
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
+  - docker-compose --version
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose --version
+
+install:
+  - docker-compose build
+
+jobs:
+  include:
+    - stage: "Linting"
+      name: "Pylint"
+      script: docker-compose run pycont pylint --load-plugins=pylint_django pycont
+    - name: "Pycodestyle"
+      script: docker-compose run pycont pycodestyle --max-line-length=99 pycont
+    - name: "Pydocstyle"
+      script: docker-compose run pycont pydocstyle pycont
