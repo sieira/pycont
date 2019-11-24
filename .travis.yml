@@ -1,7 +1,5 @@
 env:
   DOCKER_COMPOSE_VERSION: 1.24.1
-  global:
-    - CC_TEST_REPORTER_ID=4d4ecf23505b85ff78c10fa641b84bfe277e488168ca21118062cba808e5de11
 
 before_install:
   - sudo apt-get update
