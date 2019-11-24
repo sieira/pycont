@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'pycont.apps.accounts',
+    'pycont.apps.transactions',
 ]
 
 LANGUAGE_CODE = 'en-us'
