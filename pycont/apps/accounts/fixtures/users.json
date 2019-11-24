@@ -21,7 +21,7 @@
     "model": "auth.user",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$150000$UyBkydGJBYor$FHzPG6hBYIoFWGma7tc7wuk3HZ45+JL3sAvjTNMMAmU=",
+        "password": "pbkdf2_sha256$150000$dw4YAcFud8ym$Jg5MhV8D/k8OiKzYaGzM0Yqo7rwJTWxkam/Buj3AL7I=",
         "last_login": null,
         "is_superuser": false,
         "username": "sieira",

@@ -9,4 +9,4 @@ class Account(PycontModel):
         unique_together = ['name', 'user']
 
     name = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='accounts')
