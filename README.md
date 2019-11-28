@@ -1,4 +1,4 @@
-![Build Status][] ![Maintainability][] ![Test Coverage][]
+[![BuildStatusIMG][]][BuildStatus] [![MaintainabilityIMG][]][Mantainability] [![TestCoverageIMG][]][TestCoverage]
 
 # 🍺 PYCONT
 
@@ -24,10 +24,9 @@ A perpetually incomplete personal finances app
 
 Pycont uses swagger, you can access it via `http://localhost:8080/doc/swagger`
 
-[Build Status]: https://travis-ci.org/sieira/pycont.png?branch=master (https://travis-ci.org/sieira/pycont)
-[Maintainability]: https://api.codeclimate.com/v1/badges/4578991db8bc4049a8e1/maintainability (
-    https://codeclimate.com/github/sieira/pycont/maintainability
-)
-[Test Coverage]: https://api.codeclimate.com/v1/badges/4578991db8bc4049a8e1/test_coverage (
-    https://codeclimate.com/github/sieira/pycont/test_coverage
-)
+[BuildStatusIMG]: https://travis-ci.org/sieira/pycont.png?branch=master 
+[BuildStatus]: https://travis-ci.org/sieira/pycont
+[MaintainabilityIMG]: https://api.codeclimate.com/v1/badges/4578991db8bc4049a8e1/maintainability
+[Maintainability]: https://codeclimate.com/github/sieira/pycont/maintainability
+[TestCoverageIMG]: https://api.codeclimate.com/v1/badges/4578991db8bc4049a8e1/test_coverage
+[TestCoverage]: https://codeclimate.com/github/sieira/pycont/test_coverage
