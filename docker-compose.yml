@@ -36,7 +36,7 @@ services:
 
   pycont-base:
     build:
-      context: .
+      context: ./core/
       dockerfile: build/Dockerfile.base
     command: /bin/false
     container_name: pycont-base
@@ -44,7 +44,7 @@ services:
 
   pycont:
     build:
-      context: .
+      context: ./core/
       dockerfile: build/Dockerfile.dev
     command: python manage.py runserver 0.0.0.0:8080
     container_name: pycont
@@ -62,11 +62,11 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - .:/usr/src/app/
+      - ./core/:/usr/src/app/
 
   pycont-test:
     build:
-      context: .
+      context: ./core/
       dockerfile: build/Dockerfile.dev
     command: /bin/false
     container_name: pycont-test
@@ -83,7 +83,28 @@ services:
     tty: true
     user: ${UID}:${GID}
     volumes:
-      - .:/usr/src/app/
+      - ./core/:/usr/src/app/
+
+  pycont-ui:
+    build:
+      context: ./ui/
+      dockerfile: build/Dockerfile
+    command: npm start
+    container_name: pycont-ui
+    environment:
+      - NODE_ENV=development
+    image: pycont-ui
+    networks:
+      - pycont-net
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    user: ${UID}:${GID}
+    volumes:
+      - ./ui/:/usr/src/app/
+      - node_modules:/usr/src/app/node_modules/
 
 volumes:
   mariadb_data:
+  node_modules:
