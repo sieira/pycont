@@ -63,6 +63,7 @@ services:
     tty: true
     volumes:
       - ./core/:/usr/src/app/
+      - ./setup.cfg:/usr/src/app/setup.cfg
 
   pycont-test:
     build:
