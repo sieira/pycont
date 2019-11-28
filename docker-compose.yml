@@ -85,5 +85,26 @@ services:
     volumes:
       - ./core/:/usr/src/app/
 
+  pycont-ui:
+    build:
+      context: ./ui/
+      dockerfile: build/Dockerfile
+    command: npm start
+    container_name: pycont-ui
+    environment:
+      - NODE_ENV=development
+    image: pycont-ui
+    networks:
+      - pycont-net
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    user: ${UID}:${GID}
+    volumes:
+      - ./ui/:/usr/src/app/
+      - node_modules:/usr/src/app/node_modules/
+
 volumes:
   mariadb_data:
+  node_modules:

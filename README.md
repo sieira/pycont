@@ -18,6 +18,7 @@ A perpetually incomplete personal finances app
     docker-compose exec pycont ./manage.py createsuperuser
     ```
 6. You can now create users via de Django administration backoffice on `http://localhost:8080/admin`
+7. Pycont UI should now be running on `http://localhost:3000`
 
 ## API Documentation
 
