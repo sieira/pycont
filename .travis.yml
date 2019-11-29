@@ -34,6 +34,6 @@ jobs:
       script:
         - docker-compose up -d mariadb-test
         - docker-compose run pycont-test sh -c "./wait_for_mysql.py && coverage run ./manage.py test tests --noinput --traceback || true && coverage xml"
-        - sed -i 's/\/usr\/src\/app\///g' core/cobertura.xml
+        - sed -i 's/\/usr\/src\/app\//core\//g' core/cobertura.xml
       after_script:
         - ./cc-test-reporter after-build -p /usr/src/app/pycont -t cobertura --exit-code $TRAVIS_TEST_RESULT core/cobertura.xml
