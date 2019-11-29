@@ -18,11 +18,11 @@ jobs:
   include:
     - stage: "Testing"
       name: "Pylint"
-      script: docker-compose run pycont pylint --load-plugins=pylint_django pycont
+      script: docker-compose run pycont-test pylint --load-plugins=pylint_django pycont
     - name: "Pycodestyle"
-      script: docker-compose run pycont pycodestyle pycont
+      script: docker-compose run pycont-test pycodestyle pycont
     - name: "Pydocstyle"
-      script: docker-compose run pycont pydocstyle pycont
+      script: docker-compose run pycont-test pydocstyle pycont
     - name: "Unit testing"
       before_script:
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
