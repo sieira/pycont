@@ -1,6 +1,6 @@
-[![BuildStatusIMG][]][BuildStatus] [![MaintainabilityIMG][]][Maintainability] [![TestCoverageIMG][]][TestCoverage]
-
 # 🍺 PYCONT
+
+[![BuildStatusIMG][]][BuildStatus] [![MaintainabilityIMG][]][Maintainability] [![TestCoverageIMG][]][TestCoverage]
 
 A perpetually incomplete personal finances app
 

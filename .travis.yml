@@ -11,13 +11,14 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   - docker-compose --version
 
-install:
-  - docker-compose build
-
 jobs:
   include:
-    - stage: "Testing"
-      name: "Pylint"
+    - stage: "Testing & Linting"
+      name: "Markdownlint"
+      script:
+        - gem install mdl
+        - mdl .
+    - name: "Pylint"
       script: docker-compose run pycont-test pylint --load-plugins=pylint_django pycont
     - name: "Pycodestyle"
       script: docker-compose run pycont-test pycodestyle pycont
