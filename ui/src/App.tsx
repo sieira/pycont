@@ -7,7 +7,7 @@ const App: React.FC = () => (
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
       <p>
-          🍺 Edit
+        <span role="img" aria-label="beer">🍺 Edit</span>
         {' '}
         <code>src/App.js</code>
         {' '}
