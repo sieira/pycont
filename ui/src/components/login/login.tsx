@@ -1,10 +1,12 @@
-import React, { useState, FormEvent } from "react";
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import "./login.css";
+import React, { useState, FormEvent } from 'react';
+import {
+  Button, FormGroup, FormControl, FormLabel,
+} from 'react-bootstrap';
+import './login.css';
 
-export default function Login(props: any) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
@@ -17,7 +19,7 @@ export default function Login(props: any) {
   return (
     <div className="Login">
       <form onSubmit={handleSubmit}>
-        <FormGroup controlId="username" >
+        <FormGroup controlId="username">
           <FormLabel>Username</FormLabel>
           <FormControl
             autoFocus
@@ -26,7 +28,7 @@ export default function Login(props: any) {
             onChange={(e: FormEvent) => setUsername((e.target as HTMLInputElement).value)}
           />
         </FormGroup>
-        <FormGroup controlId="password" >
+        <FormGroup controlId="password">
           <FormLabel>Password</FormLabel>
           <FormControl
             value={password}
@@ -34,7 +36,7 @@ export default function Login(props: any) {
             type="password"
           />
         </FormGroup>
-        <Button block  disabled={!validateForm()} type="submit">
+        <Button block disabled={!validateForm()} type="submit">
           Login
         </Button>
       </form>
