@@ -41,6 +41,8 @@ services:
     command: /bin/false
     container_name: pycont-base
     image: pycont-base
+    networks:
+      - pycont-net
 
   pycont:
     build:

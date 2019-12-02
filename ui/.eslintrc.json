@@ -6,8 +6,9 @@
     "mocha": true
   },
   "extends": [
+    "eslint:recommended",
     "plugin:react/recommended",
-    "airbnb"
+    "plugin:@typescript-eslint/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -26,13 +27,19 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".ts", "tsx", ".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", "tsx", ".js", ".jsx"] }],
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "quotes": [2, "single", "avoid-escape"]
   },
   "settings": {
     "import/resolver": {
       "node": {
         "extensions": [".ts", ".tsx", ".native.js"]
       }
+    },
+    "react": {
+      "version": "detect"
     }
   }
 }

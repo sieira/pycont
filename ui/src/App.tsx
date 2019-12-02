@@ -1,28 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import { Route, Router } from 'react-router-dom';
+import { checkAuth } from './store/auth/actions';
+import { AuthState } from './store/auth/types';
 
-const App: React.FC = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        <span role="img" aria-label="beer">🍺 Edit</span>
-        {' '}
-        <code>src/App.js</code>
-        {' '}
-and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-          Learn React
-      </a>
-    </header>
-  </div>
-);
+import history from './history';
+import Pages from './routes/Pages';
+import MainNav from './components/nav';
 
-export default App;
+interface Props {
+  checkAuthConnect: () => void;
+  isAuthenticated: boolean | null;
+}
+
+const App: React.FunctionComponent<Props> = ({
+  checkAuthConnect,
+  isAuthenticated
+}: Props) => {
+  
+  React.useEffect(() => {
+    checkAuthConnect();
+  }, []);
+  
+  const app = isAuthenticated !== null ? (
+    <Router history={history}>
+      <MainNav/>
+      <Route component={Pages} />
+    </Router>
+  ) : null;
+  
+  return (
+    <div className="App">
+      {app}
+    </div>
+  );
+}
+
+const mapStateToProps = (state: AuthState) => ({
+  isAuthenticated: state.isAuthenticated
+});
+
+const mapDispatchToProps = {
+  checkAuthConnect: checkAuth
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);
