@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import { compose, createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
+import thunkMiddleware from "redux-thunk-recursion-detect";
 
 import './index.css';
 import App from './App';
@@ -24,7 +25,7 @@ if (
 const store = createStore<IAuth, any, any, any>(
   authReducer,
   undefined,
-  composeEnhancers(),
+  composeEnhancers(applyMiddleware(thunkMiddleware)),
 );
 
 ReactDOM.render(

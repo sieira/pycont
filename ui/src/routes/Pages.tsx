@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Home from '../pages/Home';
 import Landing from '../pages/Landing';
-import Login from '../components/Login';
+import Login from '../components/login';
 import LoggedInRoute from './LoggedInRoute';
 import LoggedOutRoute from './LoggedOutRoute';
 import NotFound from '../pages/NotFound';

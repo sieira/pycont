@@ -27,7 +27,6 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "no-unused-vars": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".ts", "tsx", ".js", ".jsx"] }],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
@@ -38,6 +37,9 @@
       "node": {
         "extensions": [".ts", ".tsx", ".native.js"]
       }
+    },
+    "react": {
+      "version": "detect"
     }
   }
 }
