@@ -1,4 +1,4 @@
-export const LOGIN = 'LOGIN';
-export type LOGIN = typeof LOGIN;
-export const LOGOUT = 'LOGOUT';
-export type LOGOUT = typeof LOGOUT;
+export const AUTHENTICATE = 'AUTHENTICATE';
+export type AUTHENTICATE = typeof AUTHENTICATE;
+export const UNAUTHENTICATE = 'UNAUTHENTICATE';
+export type UNAUTHENTICATE = typeof UNAUTHENTICATE;

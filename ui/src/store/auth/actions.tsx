@@ -1,23 +1,23 @@
 import * as constants from './constants';
 
-export interface ILogin {
-  type: constants.LOGIN;
+export interface IAuthenticate {
+  type: constants.AUTHENTICATE;
 }
 
-export function login(): ILogin {
+export function authenticate(): IAuthenticate {
   return {
-    type: constants.LOGIN,
+    type: constants.AUTHENTICATE,
   };
 }
 
-export interface ILogout {
-  type: constants.LOGOUT;
+export interface IUnauthenticate {
+  type: constants.UNAUTHENTICATE;
 }
 
-export function logout(): ILogout {
+export function unauthenticate(): IUnauthenticate {
   return {
-    type: constants.LOGOUT,
+    type: constants.UNAUTHENTICATE,
   };
 }
 
-export type AuthenticationAction = ILogin | ILogout;
+export type AuthenticationAction = IAuthenticate | IUnauthenticate;

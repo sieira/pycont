@@ -1,5 +1,5 @@
-import { ILogin, ILogout } from './actions';
-import { LOGIN, LOGOUT } from './constants';
+import { IAuthenticate, IUnauthenticate } from './actions';
+import { AUTHENTICATE, UNAUTHENTICATE } from './constants';
 import { IAuth } from './types';
 
 export default function authReducer(
@@ -7,17 +7,16 @@ export default function authReducer(
     isAuthenticated: null,
     csrfToken: null,
   },
-  action: ILogin | ILogout,
+  action: IAuthenticate | IUnauthenticate,
 ): IAuth {
   switch (action.type) {
-    case LOGIN:
+    case AUTHENTICATE:
       return {
         csrfToken: 'what the back sent', isAuthenticated: true,
       };
-    case LOGOUT:
+    case UNAUTHENTICATE:
       return { csrfToken: null, isAuthenticated: false };
     default:
-      // pass
+      return state;
   }
-  return state;
 }

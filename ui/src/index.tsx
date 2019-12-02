@@ -7,6 +7,7 @@ import { compose, createStore } from 'redux';
 import './index.css';
 import App from './App';
 import authReducer from './store/auth/reducers';
+import { IAuth } from './store/auth/types';
 import * as serviceWorker from './serviceWorker';
 
 let composeEnhancers;

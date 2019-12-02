@@ -5,7 +5,7 @@ import {
   Button, FormGroup, FormControl, FormLabel,
 } from 'react-bootstrap';
 
-import { login } from '../../store/auth/actions';
+import { authenticate } from '../../store/auth/actions';
 
 import './login.css';
 
@@ -50,7 +50,7 @@ const Login = ({ loginConnect }: IProps) => {
 };
 
 const mapDispatchToProps = {
-  loginConnect: login,
+  loginConnect: authenticate,
 };
 
 export default connect(

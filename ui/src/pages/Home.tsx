@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { logout } from '../store/auth/actions';
+import { unauthenticate } from '../store/auth/actions';
 
 interface IProps {
   logoutConnect: () => void;
@@ -15,7 +15,7 @@ const Home = ({ logoutConnect }: IProps) => (
 );
 
 const mapDispatchToProps = {
-  logoutConnect: logout,
+  logoutConnect: unauthenticate,
 };
 
 export default connect(
