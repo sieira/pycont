@@ -1,10 +1,19 @@
 import React, { useState, FormEvent } from 'react';
+import { connect } from "react-redux";
+
+import { login } from '../../store/auth/actions';
+
 import {
   Button, FormGroup, FormControl, FormLabel,
 } from 'react-bootstrap';
+
 import './login.css';
 
-export const Login = () => {
+interface IProps {
+  loginConnect: () => void;
+}
+
+const Login = ({ loginConnect }: IProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,13 +21,9 @@ export const Login = () => {
     return username.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-  }
-
   return (
     <div className="Login">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={loginConnect}>
         <FormGroup controlId="username">
           <FormLabel>Username</FormLabel>
           <FormControl
@@ -43,3 +48,12 @@ export const Login = () => {
     </div>
   );
 }
+
+const mapDispatchToProps = {
+  loginConnect: login
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Login);
