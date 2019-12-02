@@ -9,7 +9,8 @@ const Landing: React.FC = () => (
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
       <p>
-        <span role="img" aria-label="beer">🍺 Edit</span> and save to reload.
+        <span role="img" aria-label="beer">🍺 Edit</span>
+        and save to reload.
         <br />
         <a href="/login">Let me in</a>
       </p>

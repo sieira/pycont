@@ -1,12 +1,12 @@
 import React from 'react';
-import { Route, Router } from "react-router-dom";
+import { Route, Router } from 'react-router-dom';
 
-import history from "./history";
-import Pages from "./routes/Pages";
+import history from './history';
+import Pages from './routes/Pages';
 
 const App: React.FC = () => (
   <Router history={history}>
-  <Route component={Pages} />
+    <Route component={Pages} />
   </Router>
 );
 

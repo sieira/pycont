@@ -1,21 +1,21 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch } from 'react-router-dom';
 
-import Home from "../pages/Home";
-import Landing from "../pages/Landing";
+import Home from '../pages/Home';
+import Landing from '../pages/Landing';
 import Login from '../components/Login';
-import LoggedInRoute from "./LoggedInRoute";
+import LoggedInRoute from './LoggedInRoute';
+import LoggedOutRoute from './LoggedOutRoute';
+import NotFound from '../pages/NotFound';
 
-const Pages = () => {
-
-  return (
-    <Switch>
-      <LoggedInRoute path="/home" exact={true} component={Home} />
-      <Route path="/login" exact={true} component={Login} />
-      <Route path="/" exact={true} component={Landing} />
-    </Switch>
-  );
-};
+const Pages = () => (
+  <Switch>
+    <LoggedInRoute path="/home" exact component={Home} />
+    <LoggedOutRoute path="/login" exact component={Login} />
+    <Route path="/" exact component={Landing} />
+    <Route component={NotFound} />
+  </Switch>
+);
 
 export default Pages;

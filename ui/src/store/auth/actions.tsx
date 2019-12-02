@@ -1,7 +1,4 @@
-import { ThunkDispatch as Dispatch } from "redux-thunk";
-
-import * as constants from "./constants";
-import { IAuth } from "./types";
+import * as constants from './constants';
 
 export interface ILogin {
   type: constants.LOGIN;

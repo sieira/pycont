@@ -7,7 +7,7 @@ interface IProps {
   component: React.ComponentType<any>;
 }
 
-const LoggedInRoute = ({
+const LoggedOutRoute = ({
   component: Component,
 }: IProps) => (
   <>
@@ -22,8 +22,8 @@ const LoggedInRoute = ({
       )}
     />
     <footer>
-      Logged In Footer
+      Logged Out Footer
     </footer>
   </>
 );
-export default LoggedInRoute;
+export default LoggedOutRoute;

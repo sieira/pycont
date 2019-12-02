@@ -1,11 +1,11 @@
 import React, { useState, FormEvent } from 'react';
-import { connect } from "react-redux";
-
-import { login } from '../../store/auth/actions';
+import { connect } from 'react-redux';
 
 import {
   Button, FormGroup, FormControl, FormLabel,
 } from 'react-bootstrap';
+
+import { login } from '../../store/auth/actions';
 
 import './login.css';
 
@@ -47,10 +47,10 @@ const Login = ({ loginConnect }: IProps) => {
       </form>
     </div>
   );
-}
+};
 
 const mapDispatchToProps = {
-  loginConnect: login
+  loginConnect: login,
 };
 
 export default connect(
