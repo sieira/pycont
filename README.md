@@ -1,4 +1,5 @@
 # 🍺 PYCONT
+SIGUE AQUI: https://medium.com/octopus-wealth/authenticated-routing-with-react-react-router-redux-typescript-677ed49d4bd6
 
 [![BuildStatusIMG][]][BuildStatus] [![MaintainabilityIMG][]][Maintainability] [![TestCoverageIMG][]][TestCoverage]
 
