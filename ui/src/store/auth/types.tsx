@@ -1,4 +1,4 @@
-export interface IAuth {
+export interface AuthState {
   isAuthenticated: boolean | null;
   csrfToken: string | null;
 }

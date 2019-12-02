@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 
 import { logout } from '../store/auth/actions';
 
-interface IProps {
+interface Props {
   logoutConnect: () => void;
 }
 
-const Home = ({ logoutConnect }: IProps) => (
+const Home = ({ logoutConnect }: Props) => (
   <>
     <h1>You are in the home page</h1>
     <button type="submit" onClick={logoutConnect}>log me out</button>

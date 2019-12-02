@@ -9,11 +9,11 @@ import { login } from '../../store/auth/actions';
 
 import './login.css';
 
-interface IProps {
+interface Props {
   loginConnect: () => void;
 }
 
-const Login: React.FunctionComponent<IProps> = ({ loginConnect }: IProps) => {
+const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

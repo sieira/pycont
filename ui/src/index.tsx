@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import { applyMiddleware, compose, createStore } from 'redux';
-import thunkMiddleware from "redux-thunk-recursion-detect";
+import thunkMiddleware from 'redux-thunk-recursion-detect';
 
 import './index.css';
 import App from './App';
 import authReducer from './store/auth/reducers';
-import { IAuth } from './store/auth/types';
+import { AuthState } from './store/auth/types';
 import * as serviceWorker from './serviceWorker';
 
 let composeEnhancers;
@@ -22,7 +22,7 @@ if (
   composeEnhancers = compose;
 }
 
-const store = createStore<IAuth, any, any, any>(
+const store = createStore<AuthState, any, any, any>(
   authReducer,
   undefined,
   composeEnhancers(applyMiddleware(thunkMiddleware)),

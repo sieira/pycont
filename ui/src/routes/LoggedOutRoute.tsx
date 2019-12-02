@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
-import history from "../history";
-import { IAuth } from "../store/auth/types";
+import history from '../history';
+import { AuthState } from '../store/auth/types';
 
-interface IProps {
+interface Props {
   exact?: boolean;
   isAuthenticated: boolean | null;
   path: string;
@@ -16,9 +16,9 @@ const LoggedOutRoute = ({
   component: Component,
   isAuthenticated,
   ...otherProps
-}: IProps) => {
+}: Props) => {
    if (isAuthenticated === true) {
-    history.push("/home");
+    history.push('/home');
   }  return (
     <>
       <header>
@@ -38,7 +38,7 @@ const LoggedOutRoute = ({
   );
 };
 
-const mapStateToProps = (state: IAuth) => ({
+const mapStateToProps = (state: AuthState) => ({
   isAuthenticated: state.isAuthenticated
 });
 

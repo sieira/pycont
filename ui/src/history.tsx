@@ -2,7 +2,7 @@
 import { createBrowserHistory } from 'history';
 
 declare global {
-  interface IWindow {
+  interface Window {
     dataLayer: any;
   }
 }

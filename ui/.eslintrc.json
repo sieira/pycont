@@ -30,7 +30,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".ts", "tsx", ".js", ".jsx"] }],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
-    "@typescript-eslint/interface-name-prefix": [1, { "prefixWithI": "always" }]
+    "quotes": [2, "single", "avoid-escape"]
   },
   "settings": {
     "import/resolver": {

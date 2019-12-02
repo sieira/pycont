@@ -1,22 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Router } from 'react-router-dom';
-import { checkAuth } from "./store/auth/actions";
-import { IAuth } from "./store/auth/types";
+import { checkAuth } from './store/auth/actions';
+import { AuthState } from './store/auth/types';
 
 import history from './history';
 import Pages from './routes/Pages';
 import MainNav from './components/nav';
 
-interface IProps {
+interface Props {
   checkAuthConnect: () => void;
   isAuthenticated: boolean | null;
 }
 
-const App: React.FunctionComponent<IProps> = ({
+const App: React.FunctionComponent<Props> = ({
   checkAuthConnect,
   isAuthenticated
-}: IProps) => {
+}: Props) => {
   
   React.useEffect(() => {
     checkAuthConnect();
@@ -36,7 +36,7 @@ const App: React.FunctionComponent<IProps> = ({
   );
 }
 
-const mapStateToProps = (state: IAuth) => ({
+const mapStateToProps = (state: AuthState) => ({
   isAuthenticated: state.isAuthenticated
 });
 

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { IAuth } from '../../store/auth/types';
+import { AuthState } from '../../store/auth/types';
 
-interface IProps {
+interface Props {
   isAuthenticated: boolean | null;
   csrfToken: string | null;
 }
 
-const Nav: React.FunctionComponent<IProps> = ({ isAuthenticated, csrfToken }: IProps) => {
+const Nav: React.FunctionComponent<Props> = ({ isAuthenticated, csrfToken }: Props) => {
   const logInOut = isAuthenticated ? (
     <li>
       <NavLink to="/logout">
@@ -46,7 +46,7 @@ const Nav: React.FunctionComponent<IProps> = ({ isAuthenticated, csrfToken }: IP
   
   return (
     <>
-      <p>Auth state: {isAuthenticated ? `Logged in user: ${csrfToken}` : "Logged out"}</p>
+      <p>Auth state: {isAuthenticated ? `Logged in user: ${csrfToken}` : 'Logged out'}</p>
       <ul>
         {mainLinks}
         <li>
@@ -60,7 +60,7 @@ const Nav: React.FunctionComponent<IProps> = ({ isAuthenticated, csrfToken }: IP
   );
 };
 
-const mapStateToProps = (state: IAuth): IProps => ({
+const mapStateToProps = (state: AuthState): Props => ({
   csrfToken: state.csrfToken,
   isAuthenticated: state.isAuthenticated,
 });

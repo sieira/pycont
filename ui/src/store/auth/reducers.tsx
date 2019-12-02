@@ -1,14 +1,14 @@
-import { IAuthenticate, IUnauthenticate } from './actions';
+import { Authenticate, Unauthenticate } from './actions';
 import { AUTHENTICATE, UNAUTHENTICATE } from './constants';
-import { IAuth } from './types';
+import { AuthState } from './types';
 
 export default function authReducer(
-  state: IAuth = {
+  state: AuthState = {
     isAuthenticated: null,
     csrfToken: null,
   },
-  action: IAuthenticate | IUnauthenticate,
-): IAuth {
+  action: Authenticate | Unauthenticate,
+): AuthState {
   switch (action.type) {
     case AUTHENTICATE:
       return {
