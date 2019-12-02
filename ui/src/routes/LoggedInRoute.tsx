@@ -4,19 +4,14 @@ import { Route } from 'react-router-dom';
 
 import history from '../history';
 import { AuthState } from '../store/auth/types';
+import { AuthStateRouteProps } from './types';
 
-interface Props {
-  exact?: boolean;
-  isAuthenticated: boolean | null;
-  path: string;
-  component: React.ComponentType<any>;
-}
 
 const LoggedInRoute = ({
   component: Component,
   isAuthenticated,
   ...otherProps
-}: Props) => {
+}: AuthStateRouteProps) => {
     if (isAuthenticated === false) {
     history.push('/login');
   }  return (
