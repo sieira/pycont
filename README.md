@@ -1,6 +1,6 @@
 # 🍺 PYCONT
 
-[![BuildStatusIMG][]][BuildStatus] [![MaintainabilityIMG][]][Maintainability] [![TestCoverageIMG][]][TestCoverage]
+[![BuildStatusIMG][]][BuildStatus] [![MaintainabilityIMG][]][Maintainability] [![TestCoverageIMG][]][TestCoverage] [![LicenseBadge][]][License]
 
 A perpetually incomplete personal finances app
 
@@ -34,3 +34,5 @@ Pycont uses swagger, you can access it via `http://localhost:8080/doc/swagger`
 [Maintainability]: https://codeclimate.com/github/sieira/pycont/maintainability
 [TestCoverageIMG]: https://api.codeclimate.com/v1/badges/4578991db8bc4049a8e1/test_coverage
 [TestCoverage]: https://codeclimate.com/github/sieira/pycont/test_coverage
+[LicenseBadge]: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg
+[License]: https://github.com/sieira/pycont/blob/master/LICENSE
