@@ -27,6 +27,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test-ci": "CI=true react-scripts test --watch=all --coverage",
     "eject": "react-scripts eject",
     "lint": "eslint './src/**/*.{ts,tsx}'"
   },
@@ -53,6 +54,11 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "redux-mock-store": "^1.5.3"
+  },
+  "jest": {
+    "coverageReporters": ["lcov"],
+    "collectCoverageFrom": ["src/**/*.{ts,tsx}"]
   }
 }

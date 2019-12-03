@@ -37,6 +37,9 @@ jobs:
         - docker-compose up -d mariadb-test
         - docker-compose run pycont-test sh -c "./wait_for_mysql.py && coverage run ./manage.py test tests --noinput --traceback || true; coverage xml"
         - sed -i 's/\/usr\/src\/app\//core\//g' core/cobertura.xml
+        - docker-compose run pycont-ui npm run test-ci
       after_script:
-        - ./cc-test-reporter format-coverage -t cobertura -o coverage.json core/cobertura.xml
+        - ./cc-test-reporter format-coverage -t cobertura -o coverage-core.json core/cobertura.xml
+        - ./cc-test-reporter format-coverage --prefix /usr/src/app/ --add-prefix ui/ -i lcov -o coverage-ui.json ui/lcov.info
+        - ./cc-test-reporter sum-coverage --output - --parts 2 coverage.json
         - ./cc-test-reporter upload-coverage -i coverage.json
