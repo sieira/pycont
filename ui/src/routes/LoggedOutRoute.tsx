@@ -5,7 +5,9 @@ import { AuthState } from '../store/auth/types';
 import { authStateRouteFactory } from './factories';
 
 
-const LoggedOutRoute = authStateRouteFactory(false, '/home', <header>Logged Out Header</header>, <footer>Logger Out Footer</footer>);
+const LoggedOutRoute = authStateRouteFactory(
+  false, '/home', <header>Logged Out Header</header>, <footer>Logger Out Footer</footer>
+);
 
 const mapStateToProps = (state: AuthState) => ({
   isAuthenticated: state.isAuthenticated

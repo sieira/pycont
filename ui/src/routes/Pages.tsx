@@ -9,7 +9,7 @@ import LoggedInRoute from './LoggedInRoute';
 import LoggedOutRoute from './LoggedOutRoute';
 import NotFound from '../pages/NotFound';
 
-const Pages = () => (
+const Pages = (): JSX.Element => (
   <Switch>
     <LoggedInRoute path="/home" exact component={Home} />
     <LoggedOutRoute path="/login" exact component={Login} />
