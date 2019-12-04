@@ -11,7 +11,6 @@ const mockStore = configureMockStore([thunkMiddleware]);
 const store = mockStore({});
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const loginForm = create(<Provider store={store}><MemoryRouter><Nav /></MemoryRouter></Provider>);
   expect(loginForm.toJSON()).toMatchSnapshot();
 });

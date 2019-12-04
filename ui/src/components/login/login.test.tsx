@@ -26,13 +26,12 @@ it('should be disabled when no content', () => {
   expect(loginButton.props.disabled).toBe(true);
 });
 
-it('should login when required', () => {
+it('should enable button when filled up', () => {
   const loginForm = mount(<Provider store={store}><Login /></Provider>);
-  const loginButton = loginForm.find('button');
   const usernameText = loginForm.find('input[type="username"]');
   const passwordText = loginForm.find('input[type="password"]');
   usernameText.simulate('change', {target: {value: 'Bazinga'}});
   passwordText.simulate('change', {target: {value: 'Spontiak!!'}});
-  const loginButtonAfter = loginForm.find('button');
-  expect(loginButtonAfter.props().disabled).toBe(false);
+  const loginButton = loginForm.find('button');
+  expect(loginButton.props().disabled).toBe(false);
 });

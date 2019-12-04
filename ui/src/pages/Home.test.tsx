@@ -10,7 +10,6 @@ const mockStore = configureMockStore([thunkMiddleware]);
 const store = mockStore({});
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const homePage = create(<Provider store={store}><Home /></Provider>);
   expect(homePage.toJSON()).toMatchSnapshot();
 });
