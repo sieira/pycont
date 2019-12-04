@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+Array [
+  <h1>
+    You are in the home page
+  </h1>,
+  <button
+    onClick={[Function]}
+    type="submit"
+  >
+    log me out
+  </button>,
+]
+`;
