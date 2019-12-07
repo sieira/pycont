@@ -1,36 +1,44 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { create } from 'react-test-renderer';
 
 import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk-recursion-detect';
+
 import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
 
 import Pages from '../routes/Pages';
-import NotFound from './NotFound';
 
-
+//mock store
 const mockStore = configureMockStore([thunkMiddleware]);
-const store = mockStore({});
 
-it('renders without crashing', () => {
-  const notFoundPage = create(<NotFound />);
-  expect(notFoundPage.toJSON()).toMatchSnapshot();
-});
-
-it('should land here when the URL is unknown', () => {
+// Extend expect
+export function toRedirect(path: string, dest: string, storeValues?) {
   const history = createMemoryHistory();
-
-  history.push('/hoola-kaboola');
-
-  const { getByRole } = render(
+  const store = mockStore(storeValues || {});
+  history.push(path);
+  render(
     <Provider store={store}>
       <Router history={history}>
         <Route component={Pages} />
       </Router>
     </Provider>
   );
-  expect(getByRole('heading')).toHaveTextContent('404');
-});
+  expect(history.location.pathname).toEqual(dest);
+  return {pass: true};
+}
+
+export function toRequireLogin(path: string) {
+  return toRedirect(path, '/login', {isAuthenticated: false});
+}
+
+export function toRequireLogout(path: string) {
+  return toRedirect(path, '/home', {isAuthenticated: true});
+}
+
+export default {
+  toRedirect,
+  toRequireLogin,
+  toRequireLogout
+}

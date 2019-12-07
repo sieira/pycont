@@ -26,8 +26,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test-ci": "CI=true react-scripts test --watch=all --coverage",
+    "test": "react-scripts test --testPathIgnorePatterns=src/test-utils",
+    "test-ci": "CI=true react-scripts test --testPathIgnorePatterns=src/test-utils --watch=all --coverage",
     "eject": "react-scripts eject",
     "lint": "eslint './src/**/*.{ts,tsx}'"
   },
@@ -47,6 +47,8 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
     "@typescript-eslint/eslint-plugin": "^2.9.0",
     "@typescript-eslint/parser": "^2.9.0",
     "enzyme": "^3.10.0",

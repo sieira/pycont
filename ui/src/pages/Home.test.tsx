@@ -13,3 +13,7 @@ it('renders without crashing', () => {
   const homePage = create(<Provider store={store}><Home /></Provider>);
   expect(homePage.toJSON()).toMatchSnapshot();
 });
+
+it('requires login', () => {
+  expect('/home').toRequireLogin();
+});

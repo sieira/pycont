@@ -1,7 +1,6 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
-import history from '../history';
 import { AuthStateRouteProps } from './types';
 
 
@@ -14,7 +13,7 @@ export const authStateRouteFactory = (
   ...otherProps
 }: AuthStateRouteProps): JSX.Element => {
   if (isAuthenticated !== authenticatedValue) {
-    history.push(defaultFallbackRoute);
+    return <Redirect push to={defaultFallbackRoute}/>
   }
   
   return (<>

@@ -4,15 +4,12 @@ import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk-recursion-detect';
 
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 
 import Login from '.';
 
 const mockStore = configureMockStore([thunkMiddleware]);
 const store = mockStore({})
-
-configure({adapter: new Adapter()});
 
 it('should render without crashing', () => {
   const loginForm = create(<Provider store={store}><Login /></Provider>);
@@ -34,4 +31,8 @@ it('should enable button when filled up', () => {
   passwordText.simulate('change', {target: {value: 'Spontiak!!'}});
   const loginButton = loginForm.find('button');
   expect(loginButton.props().disabled).toBe(false);
+});
+
+it('should require logout', () => {
+  expect('/login').toRequireLogout();
 });
