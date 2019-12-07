@@ -36,7 +36,13 @@ jobs:
       script:
         - docker-compose up -d mariadb-test
         - docker-compose run pycont-test sh -c "./wait_for_mysql.py && coverage run ./manage.py test tests --noinput --traceback || true; coverage xml"
+        # cc-test-reporter prefix / add-prefix are not working as expected,
+        # maybe in further versions it will...
         - sed -i 's/\/usr\/src\/app\//core\//g' core/cobertura.xml
+        - docker-compose run pycont-ui npm run test-ci
+        - sed -i 's/\/usr\/src\/app\//ui\//g' ui/coverage/lcov.info
       after_script:
-        - ./cc-test-reporter format-coverage -t cobertura -o coverage.json core/cobertura.xml
+        - ./cc-test-reporter format-coverage -t cobertura -o coverage-core.json core/cobertura.xml
+        - ./cc-test-reporter format-coverage -t lcov -o coverage-ui.json ui/coverage/lcov.info
+        - ./cc-test-reporter sum-coverage --output coverage.json --parts 2 coverage-core.json coverage-ui.json
         - ./cc-test-reporter upload-coverage -i coverage.json

@@ -7,7 +7,7 @@ interface Props {
   logoutConnect: () => void;
 }
 
-const Home = ({ logoutConnect }: Props) => (
+const Home = ({ logoutConnect }: Props): JSX.Element => (
   <>
     <h1>You are in the home page</h1>
     <button type="submit" onClick={logoutConnect}>log me out</button>

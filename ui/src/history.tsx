@@ -1,4 +1,3 @@
-// tslint:disable:interface-name
 import { createBrowserHistory } from 'history';
 
 declare global {
