@@ -14,9 +14,9 @@ import Pages from '../routes/Pages';
 const mockStore = configureMockStore([thunkMiddleware]);
 
 // Extend expect
-export function toRedirect(path: string, dest: string, storeValues?) {
+export function toRedirect(path: string, dest: string, storeValues) {
   const history = createMemoryHistory();
-  const store = mockStore(storeValues || {});
+  const store = mockStore(storeValues);
   history.push(path);
   render(
     <Provider store={store}>
