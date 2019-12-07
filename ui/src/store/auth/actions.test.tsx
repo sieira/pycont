@@ -1,9 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk-recursion-detect';
 
-
-import { createMemoryHistory } from 'history';
-
 import { authenticate, unauthenticate, login, logout, checkAuth } from './actions';
 import { AUTHENTICATE, UNAUTHENTICATE } from './constants';
 
