@@ -38,11 +38,21 @@ describe('Auth actions', () => {
     store.dispatch(logout());
   });
 
-  it('Check auth checks auth', () => {
+  it('Check auth checks auth when logged out', () => {
     const unsubscribe = store.subscribe(() => {
       expect(store.getActions()).toEqual([unauthenticate()]);
       unsubscribe();
     });
     store.dispatch(checkAuth());
+  });
+
+  it('Check auth checks auth when logged in', () => {
+    store.dispatch(login()).then(() => {
+      const unsubscribe = store.subscribe(() => {
+        expect(store.getActions()).toEqual([authenticate(), authenticate()]);
+        unsubscribe();
+      });
+      store.dispatch(checkAuth());
+    });
   });
 });

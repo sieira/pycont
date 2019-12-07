@@ -4,27 +4,16 @@ exports[`renders logged in without crashing 1`] = `
 Array [
   <p>
     Auth state: 
-    Logged out
+    Logged in user: undefined
   </p>,
   <ul>
     <li>
       <a
-        aria-current="page"
-        className="active"
-        href="/"
-        onClick={[Function]}
-        style={Object {}}
-      >
-        Landing
-      </a>
-    </li>
-    <li>
-      <a
         aria-current={null}
-        href="/about"
+        href="/home"
         onClick={[Function]}
       >
-        About
+        Home
       </a>
     </li>
     <li>
@@ -39,10 +28,10 @@ Array [
     <li>
       <a
         aria-current={null}
-        href="/login"
+        href="/logout"
         onClick={[Function]}
       >
-        Log in
+        Log out
       </a>
     </li>
   </ul>,

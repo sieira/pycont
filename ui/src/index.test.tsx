@@ -3,6 +3,10 @@ import { compose } from 'redux';
 jest.mock('react-dom', () => ({ render: jest.fn() }));
 
 describe('Application root', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
   it('should render without crashing', () => {
     const div = document.createElement('div');
     div.id = 'root';
