@@ -1,24 +1,22 @@
-import React, { useState, FormEvent } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, FormEvent } from 'react'
+import { connect } from 'react-redux'
 
-import {
-  Button, FormGroup, FormControl, FormLabel,
-} from 'react-bootstrap';
+import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap'
 
-import { login } from '../../store/auth/actions';
+import { login } from '../../store/auth/actions'
 
-import './login.css';
+import './login.css'
 
 interface Props {
-  loginConnect: () => void;
+  loginConnect: () => void
 }
 
 const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   function validateForm(): boolean {
-    return username.length > 0 && password.length > 0;
+    return username.length > 0 && password.length > 0
   }
 
   return (
@@ -30,14 +28,18 @@ const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
             autoFocus
             type="username"
             value={username}
-            onChange={(e: FormEvent): void => setUsername((e.target as HTMLInputElement).value)}
+            onChange={(e: FormEvent): void =>
+              setUsername((e.target as HTMLInputElement).value)
+            }
           />
         </FormGroup>
         <FormGroup controlId="password">
           <FormLabel>Password</FormLabel>
           <FormControl
             value={password}
-            onChange={(e: FormEvent): void => setPassword((e.target as HTMLInputElement).value)}
+            onChange={(e: FormEvent): void =>
+              setPassword((e.target as HTMLInputElement).value)
+            }
             type="password"
           />
         </FormGroup>
@@ -46,14 +48,11 @@ const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
         </Button>
       </form>
     </div>
-  );
-};
+  )
+}
 
 const mapDispatchToProps = {
-  loginConnect: login,
-};
+  loginConnect: login
+}
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Login);
+export default connect(null, mapDispatchToProps)(Login)

@@ -29,7 +29,9 @@
     "test": "react-scripts test --testPathIgnorePatterns=src/test-utils",
     "test-ci": "CI=true react-scripts test --testPathIgnorePatterns=src/test-utils --watch=all --coverage",
     "eject": "react-scripts eject",
-    "lint": "eslint './src/**/*.{ts,tsx}'"
+    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "prettier": "prettier --write $(find src -regex \".*tsx*\")",
+    "prettier-ci": "prettier --check $(find src -regex \".*tsx*\")"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,6 +61,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "prettier": "1.19.1",
     "react-test-renderer": "^16.12.0",
     "redux-mock-store": "^1.5.3"
   },
@@ -72,5 +75,9 @@
     "coveragePathIgnorePatterns": [
       "src/serviceWorker.ts"
     ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
   }
 }
