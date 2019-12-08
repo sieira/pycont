@@ -31,7 +31,9 @@
     "react/jsx-filename-extension": [1, { "extensions": [".ts", "tsx", ".js", ".jsx"] }],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
-    "quotes": [2, "single", "avoid-escape"]
+    "quotes": [2, "single", "avoid-escape"],
+    "semi": [2, "never"],
+    "@typescript-eslint/member-delimiter-style": [2, {"multiline": {"delimiter": "none", "requireLast": true}}]
   },
   "settings": {
     "import/resolver": {
