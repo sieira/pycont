@@ -1,6 +1,8 @@
 - [x] Use swagger for documentation
 - [ ] Use fixer API for currency rates `https://github.com/fixerAPI/fixer#readme`
 - [ ] Build images just once for testing
-- [ ] React coverage
+- [x] React coverage
 - [x] Enforce 100% coverage (on codeclimate)
-
+- [ ] Get rid of all eslint warnings
+- [ ] Use prettier
+- [ ] Replace this TODO by a real thing
