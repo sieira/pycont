@@ -48,7 +48,7 @@ DOC_ROUTER.urls.extend([
 ])
 
 urlpatterns = [
-    path('api/', include(API_ROUTER.urls)),
-    path('doc/', include(DOC_ROUTER.urls)),
+    path(r'', include(API_ROUTER.urls)),
+    path(r'doc/', include(DOC_ROUTER.urls)),
     url(r'^admin/', admin.site.urls),
 ]

@@ -35,6 +35,8 @@ DATABASES = {
 
 DEBUG = os.environ.get('DJANGO_DEBUG')
 
+FORCE_SCRIPT_NAME = os.environ.get('FORCE_SCRIPT_NAME', '')
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -80,7 +82,8 @@ TEMPLATES = [
     },
 ]
 
-STATIC_URL = '/static/'
+STATIC_ROOT = './static/'
+STATIC_URL = FORCE_SCRIPT_NAME + '/static/'
 
 TIME_ZONE = 'UTC'
 

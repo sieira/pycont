@@ -8,6 +8,17 @@ networks:
         - subnet: 172.28.0.0/16
 
 services:
+  pycont:
+    image: nginx:1
+    networks:
+      - pycont-net
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    volumes:
+      - ./nginx/nginx.conf/:/etc/nginx/conf.d/
+      - ./api/static/:/opt/pycont/static/
+
   mariadb:
     image: mariadb:10
     container_name: pycont-mariadb
@@ -34,58 +45,57 @@ services:
     networks:
       - pycont-net
 
-  pycont-base:
+  pycont-api-base:
     build:
-      context: ./core/
+      context: ./api/
       dockerfile: build/Dockerfile.base
     command: /bin/false
-    container_name: pycont-base
-    image: pycont-base
-    networks:
-      - pycont-net
+    container_name: pycont-api-base
+    image: pycont-api-base
 
-  pycont:
+  pycont-api:
     build:
-      context: ./core/
+      context: ./api/
       dockerfile: build/Dockerfile.dev
     command: python manage.py runserver 0.0.0.0:8080
-    container_name: pycont
+    container_name: pycont-api
     depends_on:
-      - pycont-base
+      - pycont-api-base
     environment:
       DJANGO_DEBUG: 1
       DJANGO_SECRET_KEY: django-secret-key
-    image: pycont-dev
+      FORCE_SCRIPT_NAME: "/api"
+    expose:
+      - "8080"
+    image: pycont-api-dev
     networks:
       - pycont-net
-    ports:
-      - "8080:8080"
     restart: always
     stdin_open: true
     tty: true
     volumes:
-      - ./core/:/usr/src/app/
+      - ./api/:/usr/src/app/
 
-  pycont-test:
+  pycont-api-test:
     build:
-      context: ./core/
+      context: ./api/
       dockerfile: build/Dockerfile.dev
     command: /bin/false
-    container_name: pycont-test
+    container_name: pycont-api-test
     depends_on:
-      - pycont-base
+      - pycont-api-base
     environment:
       DJANGO_DEBUG: 1
       DJANGO_SECRET_KEY: django-secret-key
       MYSQL_DB_HOST: mariadb-test
-    image: pycont-dev
+    image: pycont-api-dev
     networks:
       - pycont-net
     stdin_open: true
     tty: true
     user: ${UID}:${GID}
     volumes:
-      - ./core/:/usr/src/app/
+      - ./api/:/usr/src/app/
       - ./setup.cfg:/usr/src/app/setup.cfg
 
   pycont-ui:
@@ -96,11 +106,11 @@ services:
     container_name: pycont-ui
     environment:
       - NODE_ENV=development
+    expose:
+      - "3000"
     image: pycont-ui
     networks:
       - pycont-net
-    ports:
-      - "3000:3000"
     stdin_open: true
     tty: true
     user: ${UID}:${GID}

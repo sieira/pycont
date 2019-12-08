@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=pycont-base
+ARG BASE_IMAGE=pycont-api-base
 FROM ${BASE_IMAGE}
 
 COPY build/requirements.*.txt ./
