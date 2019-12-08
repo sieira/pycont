@@ -1,29 +1,28 @@
-import React from 'react';
-import { Router, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { create } from 'react-test-renderer';
+import React from 'react'
+import { Router, Route } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { create } from 'react-test-renderer'
 
-import configureMockStore from 'redux-mock-store';
-import thunkMiddleware from 'redux-thunk-recursion-detect';
-import { createMemoryHistory } from 'history';
-import { render } from '@testing-library/react';
+import configureMockStore from 'redux-mock-store'
+import thunkMiddleware from 'redux-thunk-recursion-detect'
+import { createMemoryHistory } from 'history'
+import { render } from '@testing-library/react'
 
-import Pages from '../routes/Pages';
-import NotFound from './NotFound';
+import Pages from '../routes/Pages'
+import NotFound from './NotFound'
 
-
-const mockStore = configureMockStore([thunkMiddleware]);
-const store = mockStore({});
+const mockStore = configureMockStore([thunkMiddleware])
+const store = mockStore({})
 
 it('renders without crashing', () => {
-  const notFoundPage = create(<NotFound />);
-  expect(notFoundPage.toJSON()).toMatchSnapshot();
-});
+  const notFoundPage = create(<NotFound />)
+  expect(notFoundPage.toJSON()).toMatchSnapshot()
+})
 
 it('should land here when the URL is unknown', () => {
-  const history = createMemoryHistory();
+  const history = createMemoryHistory()
 
-  history.push('/hoola-kaboola');
+  history.push('/hoola-kaboola')
 
   const { getByRole } = render(
     <Provider store={store}>
@@ -31,6 +30,6 @@ it('should land here when the URL is unknown', () => {
         <Route component={Pages} />
       </Router>
     </Provider>
-  );
-  expect(getByRole('heading')).toHaveTextContent('404');
-});
+  )
+  expect(getByRole('heading')).toHaveTextContent('404')
+})

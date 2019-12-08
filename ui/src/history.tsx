@@ -1,11 +1,11 @@
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory } from 'history'
 
 declare global {
   interface Window {
-    dataLayer: any;
+    dataLayer: any
   }
 }
 
-const history = createBrowserHistory();
+const history = createBrowserHistory()
 
-export default history;
+export default history

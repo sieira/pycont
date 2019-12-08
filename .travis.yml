@@ -26,6 +26,8 @@ jobs:
       script: docker-compose run pycont-api-test pydocstyle pycont
     - name: "Eslint"
       script: docker-compose run pycont-ui npm run lint
+    - name: "Prettier"
+      script: docker-compose run pycont-ui npm run prettier-ci
     - name: "Unit testing"
       before_script:
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
