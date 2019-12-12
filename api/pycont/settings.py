@@ -16,7 +16,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,8 +33,6 @@ DATABASES = {
 
 
 DEBUG = os.environ.get('DJANGO_DEBUG')
-
-FORCE_SCRIPT_NAME = os.environ.get('FORCE_SCRIPT_NAME', '')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -83,7 +80,7 @@ TEMPLATES = [
 ]
 
 STATIC_ROOT = './static/'
-STATIC_URL = FORCE_SCRIPT_NAME + '/static/'
+STATIC_URL = os.environ.get('STATIC_URL', 'http://localhost:8080/api/static/')
 
 TIME_ZONE = 'UTC'
 

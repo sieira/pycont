@@ -64,12 +64,13 @@ services:
     environment:
       DJANGO_DEBUG: 1
       DJANGO_SECRET_KEY: django-secret-key
-      FORCE_SCRIPT_NAME: "/api"
     expose:
       - "8080"
     image: pycont-api-dev
     networks:
       - pycont-net
+    ports:
+      - "8081:8080"
     restart: always
     stdin_open: true
     tty: true
