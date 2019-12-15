@@ -5,18 +5,18 @@ import { AuthState } from './types'
 export default function authReducer(
   state: AuthState = {
     isAuthenticated: null,
-    csrfToken: null
+    currentUser: null
   },
   action: Authenticate | Unauthenticate
 ): AuthState {
   switch (action.type) {
     case AUTHENTICATE:
       return {
-        csrfToken: 'what the back sent',
-        isAuthenticated: true
+        isAuthenticated: true,
+        currentUser: action.payload
       }
     case UNAUTHENTICATE:
-      return { csrfToken: null, isAuthenticated: false }
+      return { isAuthenticated: false, currentUser: null }
     default:
       return state
   }

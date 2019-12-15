@@ -1,16 +1,17 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { AuthState } from '../../store/auth/types'
+
+import { AuthState, User } from '../../store/auth/types'
 
 interface Props {
   isAuthenticated: boolean | null
-  csrfToken: string | null
+  user: User | null
 }
 
 const Nav: React.FunctionComponent<Props> = ({
   isAuthenticated,
-  csrfToken
+  user
 }: Props) => {
   const logInOut = isAuthenticated ? (
     <li>
@@ -41,7 +42,7 @@ const Nav: React.FunctionComponent<Props> = ({
     <>
       <p>
         Auth state:{' '}
-        {isAuthenticated ? `Logged in user: ${csrfToken}` : 'Logged out'}
+        {isAuthenticated ? `Logged in user: ${user.username}` : 'Logged out'}
       </p>
       <ul>
         {mainLinks}
@@ -55,8 +56,8 @@ const Nav: React.FunctionComponent<Props> = ({
 }
 
 const mapStateToProps = (state: AuthState): Props => ({
-  csrfToken: state.csrfToken,
-  isAuthenticated: state.isAuthenticated
+  isAuthenticated: state.isAuthenticated,
+  user: state.currentUser
 })
 
 export default connect(mapStateToProps)(Nav)

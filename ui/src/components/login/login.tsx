@@ -8,7 +8,7 @@ import { login } from '../../store/auth/actions'
 import './login.css'
 
 interface Props {
-  loginConnect: () => void
+  loginConnect: (username: string, password: string) => void
 }
 
 const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
@@ -19,9 +19,14 @@ const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
     return username.length > 0 && password.length > 0
   }
 
+  function handleSubmit(event: FormEvent): void {
+    event.preventDefault()
+    loginConnect(username, password)
+  }
+
   return (
     <div className="Login">
-      <form onSubmit={loginConnect}>
+      <form onSubmit={handleSubmit}>
         <FormGroup controlId="username">
           <FormLabel>Username</FormLabel>
           <FormControl
@@ -51,8 +56,9 @@ const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
   )
 }
 
-const mapDispatchToProps = {
-  loginConnect: login
-}
+const mapDispatchToProps = (dispatch): Props => ({
+  loginConnect: (username: string, password: string): void =>
+    dispatch(login(username, password))
+})
 
 export default connect(null, mapDispatchToProps)(Login)
