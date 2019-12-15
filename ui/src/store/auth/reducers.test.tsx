@@ -3,15 +3,21 @@ import { authenticate, unauthenticate } from './actions'
 
 it('Should reduce on authenticate', () => {
   expect(
-    authReducer({ csrfToken: null, isAuthenticated: null }, authenticate())
-  ).toEqual({ csrfToken: 'what the back sent', isAuthenticated: true })
+    authReducer(
+      { currentUser: null, isAuthenticated: null },
+      authenticate({ username: 'Hoola Kaboola' })
+    )
+  ).toEqual({
+    currentUser: { username: 'Hoola Kaboola' },
+    isAuthenticated: true
+  })
 })
 
 it('Should reduce on unauthenticate', () => {
   expect(
     authReducer(
-      { csrfToken: 'piupiupiu', isAuthenticated: true },
+      { currentUser: { username: 'piupiupiu' }, isAuthenticated: true },
       unauthenticate()
     )
-  ).toEqual({ csrfToken: null, isAuthenticated: false })
+  ).toEqual({ currentUser: null, isAuthenticated: false })
 })

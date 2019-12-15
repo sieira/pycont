@@ -6,3 +6,5 @@
 - [ ] Get rid of all eslint warnings
 - [x] Use prettier
 - [ ] Replace this TODO by a real thing
+- [ ] Store JWT token in a cookie
+- [ ] Replace failed login by an action, currently it is logout()

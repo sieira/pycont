@@ -28,6 +28,15 @@ export function unauthenticate(): Unauthenticate {
 
 export type AuthenticationAction = Authenticate | Unauthenticate
 
+export function logout() {
+  return async (
+    dispatch: Dispatch<AuthenticationAction, {}, Action>
+  ): Promise<void> => {
+    await window.localStorage.removeItem('token')
+    dispatch(unauthenticate())
+  }
+}
+
 export function login(username: string, password: string) {
   return async (
     dispatch: Dispatch<AuthenticationAction, {}, Action>
@@ -42,27 +51,16 @@ export function login(username: string, password: string) {
         username: username,
         password: password
       })
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.non_field_errors) {
-          // TODO handle auth error
-          alert(JSON.stringify(data.non_field_errors))
-        } else {
-          // TODO use a cookie
+    }).then(function(response) {
+      if (response.status != 200) {
+        logout()
+      } else {
+        response.json().then(data => {
           window.localStorage.setItem('token', data.token)
           dispatch(authenticate(data.user))
-        }
-      })
-  }
-}
-
-export function logout() {
-  return async (
-    dispatch: Dispatch<AuthenticationAction, {}, Action>
-  ): Promise<void> => {
-    await window.localStorage.removeItem('token')
-    dispatch(unauthenticate())
+        })
+      }
+    })
   }
 }
 
@@ -70,7 +68,6 @@ export function checkAuth() {
   return async (
     dispatch: Dispatch<AuthenticationAction, {}, Action>
   ): Promise<void> => {
-    // TODO use a cookie
     const token = await window.localStorage.getItem('token')
     if (token) {
       return fetch('api/profile/', {

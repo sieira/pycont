@@ -1,4 +1,5 @@
 import expect from 'expect'
+import jestFetchMock from 'jest-fetch-mock'
 import '@testing-library/jest-dom/extend-expect'
 
 import extendExpect from './test-utils/extend-expect.test'
@@ -10,3 +11,5 @@ import Adapter from 'enzyme-adapter-react-16'
 configure({ adapter: new Adapter() })
 
 expect.extend(extendExpect)
+
+global.fetch = jestFetchMock
