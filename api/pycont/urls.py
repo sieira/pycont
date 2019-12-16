@@ -13,15 +13,18 @@ from drf_yasg.views import get_schema_view
 
 from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
+from rest_framework_jwt.views import obtain_jwt_token
 
 from pycont.apps.accounts.views import AccountViewSet
+from pycont.apps.users.views import user_profile
 
 API_ROUTER = DefaultRouter()
 DOC_ROUTER = DefaultRouter()
 
 API_ROUTER.register(r'accounts', AccountViewSet, basename='accounts')
 API_ROUTER.urls.extend([
-    path(r'auth/', include('rest_framework.urls')),
+    path(r'auth/', obtain_jwt_token),
+    path(r'profile/', user_profile),
 ])
 
 # pylint: disable=invalid-name

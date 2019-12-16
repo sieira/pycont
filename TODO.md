@@ -4,5 +4,7 @@
 - [x] React coverage
 - [x] Enforce 100% coverage (on codeclimate)
 - [ ] Get rid of all eslint warnings
-- [ ] Use prettier
+- [x] Use prettier
 - [ ] Replace this TODO by a real thing
+- [ ] Store JWT token in a cookie
+- [ ] Replace failed login by an action, currently it is logout()

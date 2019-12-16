@@ -7,7 +7,7 @@ import thunkMiddleware from 'redux-thunk-recursion-detect'
 
 export function createWithProvider(element, authState) {
   const mockStore = configureMockStore([thunkMiddleware])
-  const store = mockStore({ isAuthenticated: authState })
+  const store = mockStore(authState)
   return create(
     <Provider store={store}>
       <MemoryRouter>{element}</MemoryRouter>

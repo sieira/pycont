@@ -1,4 +1,8 @@
+export interface User {
+  username: string
+}
+
 export interface AuthState {
   isAuthenticated: boolean | null
-  csrfToken: string | null
+  currentUser: User | null
 }
