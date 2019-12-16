@@ -43,14 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'rest_framework_simplejwt.token_blacklist',
     'pycont.apps.users',
     'pycont.apps.accounts',
     'pycont.apps.transactions',
 ]
-
-JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'pycont.utils.jwt_response_handler'
-}
 
 LANGUAGE_CODE = 'en-us'
 
@@ -66,7 +63,7 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
@@ -78,6 +75,12 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 STATIC_ROOT = './static/'
 STATIC_URL = os.environ.get('STATIC_URL', 'http://localhost:8080/api/static/')
+
+SIMPLE_JWT = {
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ROTATE_REFRESH_TOKENS': True,
+    'AUTH_HEADER_TYPES': ('JWT',),
+}
 
 TEMPLATES = [
     {

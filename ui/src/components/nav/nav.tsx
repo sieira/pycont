@@ -42,7 +42,7 @@ const Nav: React.FunctionComponent<Props> = ({
     <>
       <p>
         Auth state:{' '}
-        {isAuthenticated ? `Logged in user: ${user.username}` : 'Logged out'}
+        {isAuthenticated ? `Logged in user: ${user?.username}` : 'Logged out'}
       </p>
       <ul>
         {mainLinks}

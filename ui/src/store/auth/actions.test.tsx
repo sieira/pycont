@@ -34,7 +34,7 @@ describe('Auth actions', () => {
 
   it('Login authenticates', () => {
     fetch.mockResponseOnce(
-      JSON.stringify({ token: 'something', user: { username: 'optimus' } })
+      JSON.stringify({ access: 'something', user: { username: 'optimus' } })
     )
     const unsubscribe = store.subscribe(() => {
       expect(window.localStorage.getItem('token')).toEqual('something')
@@ -64,7 +64,7 @@ describe('Auth actions', () => {
 
   it('checkAuth checks auth when logged in', () => {
     fetch.mockResponses(
-      [JSON.stringify({ token: 'something', user: { username: 'optimus' } })],
+      [JSON.stringify({ access: 'something', user: { username: 'optimus' } })],
       [JSON.stringify({ username: 'optimus' })]
     )
     store.dispatch(login('optimus', 'prime')).then(() => {
@@ -82,7 +82,7 @@ describe('Auth actions', () => {
 
   it('checkAuth logs out when expired', () => {
     fetch.mockResponses(
-      [JSON.stringify({ token: 'something', user: { username: 'optimus' } })],
+      [JSON.stringify({ access: 'something', user: { username: 'optimus' } })],
       ['Reponse', { status: 401 }]
     )
     store.dispatch(login('optimus', 'prime')).then(() => {

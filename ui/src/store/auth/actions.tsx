@@ -52,11 +52,11 @@ export function login(username: string, password: string) {
         password: password
       })
     }).then(function(response) {
-      if (response.status != 200) {
+      if (response.status !== 200) {
         logout()
       } else {
         response.json().then(data => {
-          window.localStorage.setItem('token', data.token)
+          window.localStorage.setItem('token', data.access)
           dispatch(authenticate(data.user))
         })
       }

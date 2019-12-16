@@ -1,6 +1,6 @@
 Django
 django-mysql
 djangorestframework
-djangorestframework-jwt
+djangorestframework_simplejwt
 drf-yasg
 mysqlclient

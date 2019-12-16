@@ -56,7 +56,7 @@ const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
   )
 }
 
-const mapDispatchToProps = (dispatch): Props => ({
+const mapDispatchToProps = (dispatch: any): Props => ({
   loginConnect: (username: string, password: string): void =>
     dispatch(login(username, password))
 })
