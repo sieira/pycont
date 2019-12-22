@@ -16,7 +16,7 @@ services:
       - "8080:80"
     restart: unless-stopped
     volumes:
-      - ./nginx/nginx.conf/:/etc/nginx/conf.d/
+      - ./nginx/nginx.conf/default.conf:/etc/nginx/conf.d/default.conf
       - ./api/static/:/opt/pycont/static/
 
   mariadb:
@@ -71,7 +71,7 @@ services:
     networks:
       - pycont-net
     ports:
-      - "8081:8080"
+      - "8082:8080"
     restart: always
     stdin_open: true
     tty: true
@@ -107,6 +107,7 @@ services:
     command: npm start
     container_name: pycont-ui
     environment:
+      - REACT_APP_API_URL=http://pycont-api:8080/
       - NODE_ENV=development
     expose:
       - "3000"

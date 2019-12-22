@@ -20,6 +20,8 @@ ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+CSRF_COOKIE_SECURE = bool(int(os.getenv('AUTH_COOKIE_SECURE', '1')))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -73,17 +75,18 @@ ROOT_URLCONF = 'pycont.urls'
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
-STATIC_ROOT = './static/'
-STATIC_URL = os.environ.get('STATIC_URL', 'http://localhost:8080/api/static/')
+SESSION_COOKIE_SECURE = bool(int(os.getenv('AUTH_COOKIE_SECURE', '1')))
 
 SIMPLE_JWT = {
     'AUTH_COOKIE': 'Authorization',
     'AUTH_COOKIE_SAMESITE': 'Strict',
-    'AUTH_COOKIE_SECURE': bool(os.getenv('AUTH_COOKIE_SECURE', '1')),
+    'AUTH_COOKIE_SECURE': bool(int(os.getenv('AUTH_COOKIE_SECURE', '1'))),
     'BLACKLIST_AFTER_ROTATION': True,
     'ROTATE_REFRESH_TOKENS': True,
 }
 
+STATIC_ROOT = './static/'
+STATIC_URL = os.environ.get('STATIC_URL', 'http://localhost:8080/api/static/')
 
 TEMPLATES = [
     {

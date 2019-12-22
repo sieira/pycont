@@ -19,7 +19,7 @@ RUN set -ex; \
         xmlsec-dev \
         zlib-dev \
     "; \
-    RUN_DEPS="mariadb-connector-c"; \
+    RUN_DEPS="mariadb-connector-c libxml2"; \
     apk add --no-cache --virtual .build-deps $BUILD_DEPS; \
     pip install --no-cache-dir -c requirements.constraint.txt -r requirements.base.txt; \
     rm requirements.*.txt; \
