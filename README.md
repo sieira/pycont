@@ -7,21 +7,27 @@ A perpetually incomplete personal finances app
 ## Installation
 
 1. Clone the project
-2. run docker-compose up -d
-3. pycont is now running, and accessible through `http://locahost:8080`
-4. Run initial migrations
+1. Link the adequate docker-compose file, depending on your environment.
+  * *production* `ln -s docker-compose.prod.yml docker-compose.yml`
+  * *dev* `ln -s docker-compose.dev.yml docker-compose.yml`
+1. *only prod*: Put your certificate and key in `nginx/cert.pem` and `nginx/cert-key.pem`
+1. run docker-compose up -d
+1. pycont is now running, and accessible through:
+  * *production* `https://localhost:8081`
+  * *dev* `http://locahost:8080`
+1. Run initial migrations
 
     ```sh
     docker-compose exec pycont-api ./manage.py migrate
     ```
 
-5. Bootstrap initial users (admin:admin)
+1. Bootstrap initial users (admin:admin)
 
     ```sh
     docker-compose exec pycont-api ./manage.py loaddata users
     ```
 
-6. You can now create users via de Django administration backoffice on `http://localhost:8080/api/admin`
+1. You can now create users via de Django administration backoffice on `http://localhost:8082/admin/`
 
 ## API Documentation
 

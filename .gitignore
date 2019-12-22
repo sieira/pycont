@@ -1,4 +1,6 @@
-.*.swp
+*.pem
 .*.swo
+.*.swp
 .DS_Store
 .env
+docker-compose.yml
