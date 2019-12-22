@@ -14,9 +14,16 @@ import { AUTHENTICATE, UNAUTHENTICATE } from './constants'
 const mockStore = configureMockStore([thunkMiddleware])
 const store = mockStore({ isAuthenticated: false })
 
+function actionChecker(actions) {
+  const unsubscribe = store.subscribe(() => {
+    unsubscribe()
+    expect(store.getActions()).toEqual(actions)
+  })
+  return unsubscribe
+}
+
 describe('Auth actions', () => {
   beforeEach(() => {
-    window.localStorage.clear()
     fetch.resetMocks()
     store.clearActions()
   })
@@ -33,77 +40,57 @@ describe('Auth actions', () => {
   })
 
   it('Login authenticates', () => {
-    fetch.mockResponseOnce(
-      JSON.stringify({ access: 'something', user: { username: 'optimus' } })
-    )
-    const unsubscribe = store.subscribe(() => {
-      expect(window.localStorage.getItem('token')).toEqual('something')
-      expect(store.getActions()).toEqual([
-        authenticate({ username: 'optimus' })
-      ])
-      unsubscribe()
-    })
+    fetch.mockResponseOnce(JSON.stringify({ user: { username: 'optimus' } }))
+    actionChecker([authenticate({ username: 'optimus' })])
     store.dispatch(login('optimus', 'prime'))
   })
 
   it('Logout unauthenticates', () => {
-    const unsubscribe = store.subscribe(() => {
-      expect(store.getActions()).toEqual([unauthenticate()])
-      unsubscribe()
-    })
+    fetch.mockResponseOnce()
+    actionChecker([unauthenticate()])
     store.dispatch(logout())
   })
 
+  it("Failed logout don't unauthenticate", async () => {
+    fetch.mockResponseOnce('Shit happened', { status: 500 })
+    await expect(store.dispatch(logout())).rejects.toThrow()
+    expect(store.getActions()).toEqual([])
+  })
+
   it('checkAuth checks auth when logged out', () => {
-    const unsubscribe = store.subscribe(() => {
-      expect(store.getActions()).toEqual([unauthenticate()])
-      unsubscribe()
-    })
+    fetch.mockResponseOnce('UNAUTHORIZED', { status: 401 })
+    actionChecker([unauthenticate()])
     store.dispatch(checkAuth())
   })
 
   it('checkAuth checks auth when logged in', () => {
     fetch.mockResponses(
-      [JSON.stringify({ access: 'something', user: { username: 'optimus' } })],
+      [JSON.stringify({ user: { username: 'optimus' } })],
       [JSON.stringify({ username: 'optimus' })]
     )
     store.dispatch(login('optimus', 'prime')).then(() => {
-      const unsubscribe = store.subscribe(() => {
-        expect(store.getActions()).toEqual([
-          authenticate({ username: 'optimus' }),
-          authenticate({ username: 'optimus' })
-        ])
-        unsubscribe()
-      })
-
+      actionChecker([
+        authenticate({ username: 'optimus' }),
+        authenticate({ username: 'optimus' })
+      ])
       store.dispatch(checkAuth())
     })
   })
 
   it('checkAuth logs out when expired', () => {
     fetch.mockResponses(
-      [JSON.stringify({ access: 'something', user: { username: 'optimus' } })],
+      [JSON.stringify({ user: { username: 'optimus' } })],
       ['Reponse', { status: 401 }]
     )
     store.dispatch(login('optimus', 'prime')).then(() => {
-      const unsubscribe = store.subscribe(() => {
-        expect(store.getActions()).toEqual([
-          authenticate({ username: 'optimus' }),
-          unauthenticate()
-        ])
-        unsubscribe()
-      })
-
+      actionChecker([authenticate({ username: 'optimus' }), unauthenticate()])
       store.dispatch(checkAuth())
     })
   })
 
   it('Failed login unauthenticates', () => {
     fetch.mockResponses(['You shall not pass', { status: 401 }])
-    const unsubscribe = store.subscribe(() => {
-      expect(store.getActions()).toEqual([unauthenticate()])
-      unsubscribe()
-    })
+    actionChecker([unauthenticate()])
     store.dispatch(login('optimus', 'prime'))
   })
 })

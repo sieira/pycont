@@ -7,10 +7,9 @@ coreapi==2.3.3
 coreschema==0.0.4
 coverage==5.0
 decorator==4.4.1
-Django==3.0
+Django==3.0.1
 django-mysql==3.3.0
 djangorestframework==3.11.0
-djangorestframework-simplejwt==4.4.0
 drf-yasg==1.17.0
 idna==2.8
 inflection==0.3.1
@@ -18,7 +17,7 @@ ipython==7.10.2
 ipython-genutils==0.2.0
 isort==4.3.21
 itypes==1.1.0
-jedi==0.15.1
+jedi==0.15.2
 Jinja2==2.10.3
 lazy-object-proxy==1.4.3
 MarkupSafe==1.1.1
@@ -45,7 +44,7 @@ six==1.13.0
 snowballstemmer==2.0.0
 sqlparse==0.3.0
 traitlets==4.3.3
-uritemplate==3.0.0
+uritemplate==3.0.1
 urllib3==1.25.7
 wcwidth==0.1.7
 wrapt==1.11.2
