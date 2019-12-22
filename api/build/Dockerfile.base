@@ -7,6 +7,7 @@ COPY build/requirements.*.txt ./
 RUN set -ex; \
     BUILD_DEPS=" \
         gcc \
+        git \
         libffi-dev \
         libressl-dev \
         libxml2-dev \

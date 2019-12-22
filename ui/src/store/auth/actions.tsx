@@ -32,8 +32,15 @@ export function logout() {
   return async (
     dispatch: Dispatch<AuthenticationAction, {}, Action>
   ): Promise<void> => {
-    await window.localStorage.removeItem('token')
-    dispatch(unauthenticate())
+    return fetch('api/auth/delete/', { method: 'POST' }).then(function(
+      response
+    ) {
+      if (response.status !== 200) {
+        throw new Error('Could not logout')
+      } else {
+        dispatch(unauthenticate())
+      }
+    })
   }
 }
 
@@ -56,7 +63,6 @@ export function login(username: string, password: string) {
         logout()
       } else {
         response.json().then(data => {
-          window.localStorage.setItem('token', data.access)
           dispatch(authenticate(data.user))
         })
       }
@@ -68,25 +74,19 @@ export function checkAuth() {
   return async (
     dispatch: Dispatch<AuthenticationAction, {}, Action>
   ): Promise<void> => {
-    const token = await window.localStorage.getItem('token')
-    if (token) {
-      return fetch('api/profile/', {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `JWT ${token}`
-        },
-        method: 'GET'
-      }).then(function(resp) {
-        if (resp.status !== 200) {
-          dispatch(unauthenticate())
-          return
-        } else {
-          resp.json().then(data => dispatch(authenticate(data)))
-        }
-      })
-    } else {
-      dispatch(unauthenticate())
-    }
+    return fetch('api/profile/', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      method: 'GET'
+    }).then(function(resp) {
+      if (resp.status !== 200) {
+        dispatch(unauthenticate())
+        return
+      } else {
+        resp.json().then(data => dispatch(authenticate(data)))
+      }
+    })
   }
 }

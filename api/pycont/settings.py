@@ -77,10 +77,13 @@ STATIC_ROOT = './static/'
 STATIC_URL = os.environ.get('STATIC_URL', 'http://localhost:8080/api/static/')
 
 SIMPLE_JWT = {
+    'AUTH_COOKIE': 'Authorization',
+    'AUTH_COOKIE_SAMESITE': 'Strict',
+    'AUTH_COOKIE_SECURE': bool(os.getenv('AUTH_COOKIE_SECURE', '1')),
     'BLACKLIST_AFTER_ROTATION': True,
     'ROTATE_REFRESH_TOKENS': True,
-    'AUTH_HEADER_TYPES': ('JWT',),
 }
+
 
 TEMPLATES = [
     {

@@ -6,5 +6,6 @@
 - [ ] Get rid of all eslint warnings
 - [x] Use prettier
 - [ ] Replace this TODO by a real thing
-- [ ] Store JWT token in a cookie
+- [x] Store JWT token in a cookie
 - [ ] Replace failed login by an action, currently it is logout()
+- [ ] Check if simplejwt has merged `https://github.com/davesque/django-rest-framework-simplejwt/pull/157/files` and use the npm package again and use the npm package again

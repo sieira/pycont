@@ -13,7 +13,7 @@ from drf_yasg.views import get_schema_view
 
 from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView, TokenCookieDeleteView
 
 from pycont.apps.accounts.views import AccountViewSet
 from pycont.apps.users.views import user_profile, ObtainJwtPairView
@@ -23,8 +23,9 @@ DOC_ROUTER = DefaultRouter()
 
 API_ROUTER.register(r'accounts', AccountViewSet, basename='accounts')
 API_ROUTER.urls.extend([
-    path(r'auth/', ObtainJwtPairView.as_view(), name='auth'),
-    path(r'auth/refresh/', TokenRefreshView.as_view(), name='auth_refresh'),
+    path(r'auth/', ObtainJwtPairView.as_view(), name='login'),
+    path(r'auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path(r'auth/delete/', TokenCookieDeleteView.as_view(), name='logout'),
     path(r'profile/', user_profile),
 ])
 
