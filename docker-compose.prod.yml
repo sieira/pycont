@@ -88,6 +88,8 @@ services:
     tty: true
     volumes:
       - ./api/:/usr/src/app/
+      - ${CERT_FILE}:/etc/ssl/certs/pycont.pem
+      - ${CERT_KEY_FILE}:/etc/ssl/certs/pycont-key.pem
 
   pycont-api-test:
     build:
@@ -118,7 +120,7 @@ services:
     command: npm start
     container_name: pycont-ui
     environment:
-      - REACT_APP_API_URL=http://pycont-api:8080/
+      - REACT_APP_API_URL=https://pycont-api:8080/
       - NODE_ENV=production
     expose:
       - "3000"
