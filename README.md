@@ -11,6 +11,7 @@ A perpetually incomplete personal finances app
   * *production* `ln -s docker-compose.prod.yml docker-compose.yml`
   * *dev* `ln -s docker-compose.dev.yml docker-compose.yml`
 1. *only prod*: Put your certificate and key in `nginx/cert.pem` and `nginx/cert-key.pem`
+1. *only prod*: Copy the `env.tpl`to `.env` and fill in the information
 1. run docker-compose up -d
 1. pycont is now running, and accessible through:
   * *production* `https://localhost:8081`
