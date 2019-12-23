@@ -7,14 +7,11 @@ A perpetually incomplete personal finances app
 ## Installation
 
 1. Clone the project
-1. Link the adequate docker-compose file, depending on your environment.
-  * *production* `ln -s docker-compose.prod.yml docker-compose.yml`
-  * *dev* `ln -s docker-compose.dev.yml docker-compose.yml`
-1. *only prod*: Copy the `env.tpl`to `.env` and fill in the information
+1. Copy the `env.XXX.tpl`to `.env` *and fill in the required information*, note that there are two of them,
+   each one suitable for a different environment.
 1. run docker-compose up -d
-1. pycont is now running, and accessible through:
-  * *production* `https://$NGINX_HOSTNAME:$NGINX_HTTPS_PORT`
-  * *dev* `http://locahost:8080`
+1. pycont is now running, and accessible through: `http://localhost:$NGINX_HTTPS_PORT`
+1. Only in *production*: Pycont will only work behind https, you can find examples of configuration in [the doc folder](doc/examples)
 1. Run initial migrations
 
     ```sh

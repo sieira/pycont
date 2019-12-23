@@ -20,7 +20,7 @@ ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-CSRF_COOKIE_SECURE = bool(int(os.getenv('AUTH_COOKIE_SECURE', '1')))
+CSRF_COOKIE_SECURE = bool(int(os.getenv('SECURE_COOKIES', '1')))
 
 DATABASES = {
     'default': {
@@ -75,12 +75,12 @@ ROOT_URLCONF = 'pycont.urls'
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
-SESSION_COOKIE_SECURE = bool(int(os.getenv('AUTH_COOKIE_SECURE', '1')))
+SESSION_COOKIE_SECURE = bool(int(os.getenv('SECURE_COOKIES', '1')))
 
 SIMPLE_JWT = {
     'AUTH_COOKIE': 'Authorization',
     'AUTH_COOKIE_SAMESITE': 'Strict',
-    'AUTH_COOKIE_SECURE': bool(int(os.getenv('AUTH_COOKIE_SECURE', '1'))),
+    'SECURE_COOKIES': bool(int(os.getenv('SECURE_COOKIES', '1'))),
     'BLACKLIST_AFTER_ROTATION': True,
     'ROTATE_REFRESH_TOKENS': True,
 }

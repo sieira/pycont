@@ -10,7 +10,7 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker-compose --version
-  - ln -s docker-compose.dev.yml docker-compose.yml
+  - ln -s env.dev.tpl .env
 
 jobs:
   include:
