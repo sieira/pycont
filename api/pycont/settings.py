@@ -36,6 +36,8 @@ DATABASES = {
 
 DEBUG = os.environ.get('DJANGO_DEBUG')
 
+FORCE_SCRIPT_NAME = os.environ.get('FORCE_SCRIPT_NAME', '/')
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -111,5 +113,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+USE_X_FORWARDED_HOST = True
 
 WSGI_APPLICATION = 'pycont.wsgi.application'

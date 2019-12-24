@@ -65,6 +65,7 @@ services:
       SECURE_COOKIES: ${SECURE_COOKIES}
       DJANGO_DEBUG: ${DJANGO_DEBUG}
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      FORCE_SCRIPT_NAME: ${API_PATH}
     expose:
       - "8080"
     image: pycont-api-dev
@@ -107,7 +108,8 @@ services:
     command: npm start
     container_name: pycont-ui
     environment:
-      - REACT_APP_API_URL=http://pycont-api:8080/
+      - REACT_APP_API_HOST=http://pycont-api:8080/
+      - REACT_APP_API_PATH=${API_PATH}
       - NODE_ENV=${NODE_ENV}
     expose:
       - "3000"

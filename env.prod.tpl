@@ -11,6 +11,7 @@ NGINX_HTTP_PORT=8080
 #################################
 # DO NOT CHANGE BELOW THIS LINE #
 #################################
+API_PATH=/api
 DJANGO_DEBUG=0
 IS_PROD=1
 NODE_ENV=production
