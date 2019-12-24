@@ -88,7 +88,7 @@ SIMPLE_JWT = {
 }
 
 STATIC_ROOT = './static/'
-STATIC_URL = os.environ.get('STATIC_URL', 'http://localhost:8080/api/static/')
+STATIC_URL = os.environ.get('STATIC_URL', '/api/static/')
 
 TEMPLATES = [
     {
