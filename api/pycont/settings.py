@@ -1,6 +1,8 @@
 """Global settings for pycont."""
 import os
 
+__SECURE_COOKIES__ = bool(int(os.getenv('SECURE_COOKIES', '1')))
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -20,7 +22,7 @@ ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-CSRF_COOKIE_SECURE = bool(int(os.getenv('AUTH_COOKIE_SECURE', '1')))
+CSRF_COOKIE_SECURE = __SECURE_COOKIES__
 
 DATABASES = {
     'default': {
@@ -35,6 +37,8 @@ DATABASES = {
 
 
 DEBUG = os.environ.get('DJANGO_DEBUG')
+
+FORCE_SCRIPT_NAME = os.environ.get('FORCE_SCRIPT_NAME', '/')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -75,18 +79,18 @@ ROOT_URLCONF = 'pycont.urls'
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
-SESSION_COOKIE_SECURE = bool(int(os.getenv('AUTH_COOKIE_SECURE', '1')))
+SESSION_COOKIE_SECURE = __SECURE_COOKIES__
 
 SIMPLE_JWT = {
     'AUTH_COOKIE': 'Authorization',
     'AUTH_COOKIE_SAMESITE': 'Strict',
-    'AUTH_COOKIE_SECURE': bool(int(os.getenv('AUTH_COOKIE_SECURE', '1'))),
+    'AUTH_COOKIE_SECURE': __SECURE_COOKIES__,
     'BLACKLIST_AFTER_ROTATION': True,
     'ROTATE_REFRESH_TOKENS': True,
 }
 
 STATIC_ROOT = './static/'
-STATIC_URL = os.environ.get('STATIC_URL', 'http://localhost:8080/api/static/')
+STATIC_URL = os.environ.get('STATIC_URL', '/api/static/')
 
 TEMPLATES = [
     {
@@ -111,5 +115,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+USE_X_FORWARDED_HOST = True
 
 WSGI_APPLICATION = 'pycont.wsgi.application'

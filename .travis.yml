@@ -10,7 +10,7 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker-compose --version
-  - ln -s docker-compose.dev.yml docker-compose.yml
+  - ln -s env.dev.tpl .env
 
 jobs:
   include:
@@ -34,7 +34,7 @@ jobs:
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
-        - echo UID=$UID > .env
+        - echo UID=$UID >> .env
         - echo GID=$GID >> .env
       script:
         - docker-compose up -d mariadb-test
