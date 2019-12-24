@@ -8,9 +8,10 @@ DJANGO_SECRET_KEY=django-secret-key
 # An arbitrary available port
 NGINX_HTTP_PORT=8080
 
-#################################
-# DO NOT CHANGE BELOW THIS LINE #
-#################################
+#############################################
+#   DO NOT CHANGE ANYTHING BELOW THIS LINE  #
+# UNLESS YOU REALLY KNOW WHAT YOU ARE DOING #
+#############################################
 API_PATH=/api
 DJANGO_DEBUG=0
 IS_PROD=1

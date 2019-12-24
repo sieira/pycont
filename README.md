@@ -7,11 +7,11 @@ A perpetually incomplete personal finances app
 ## Installation
 
 1. Clone the project
-1. Copy the `env.XXX.tpl`to `.env` *and fill in the required information*, note that there are two of them,
+1. Copy the `env.XXX.tpl`to `.env` **and fill in the required information**, note that there are two of them,
    each one suitable for a different environment.
 1. run docker-compose up -d
-1. pycont is now running, and accessible through: `http://localhost:$NGINX_HTTPS_PORT`
-1. Only in *production*: Pycont will only work behind https, you can find examples of configuration in [the doc folder](doc/examples)
+1. pycont is now running, and accessible through: `http://localhost:$NGINX_HTTP_PORT`
+1. **Only in production**: Pycont will only work behind https, you can find examples of configuration in [the doc folder](doc/examples)
 1. Run initial migrations
 
     ```sh
@@ -24,11 +24,11 @@ A perpetually incomplete personal finances app
     docker-compose exec pycont-api ./manage.py loaddata users
     ```
 
-1. You can now create users via de Django administration backoffice on `http://localhost:$NGINX_HTTPS_PORT/api/admin/`
+1. You can now create users via de Django administration backoffice on `http://localhost:$NGINX_HTTP_PORT/api/admin/`
 
 ## API Documentation
 
-Pycont uses swagger, you can access it via `http://localhost:$NGINX_HTTPS_PORT/api/doc/swagger`
+Pycont uses swagger, you can access it via `http://localhost:$NGINX_HTTP_PORT/api/doc/swagger`
 
 [BuildStatusIMG]: https://travis-ci.org/sieira/pycont.png?branch=master
 [BuildStatus]: https://travis-ci.org/sieira/pycont
