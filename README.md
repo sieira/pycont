@@ -24,11 +24,11 @@ A perpetually incomplete personal finances app
     docker-compose exec pycont-api ./manage.py loaddata users
     ```
 
-1. You can now create users via de Django administration backoffice on `http://localhost:8082/admin/`
+1. You can now create users via de Django administration backoffice on `http://localhost:$NGINX_HTTPS_PORT/api/admin/`
 
 ## API Documentation
 
-Pycont uses swagger, you can access it via `http://localhost:8080/api/doc/swagger`
+Pycont uses swagger, you can access it via `http://localhost:$NGINX_HTTPS_PORT/api/doc/swagger`
 
 [BuildStatusIMG]: https://travis-ci.org/sieira/pycont.png?branch=master
 [BuildStatus]: https://travis-ci.org/sieira/pycont

@@ -71,8 +71,6 @@ services:
     image: pycont-api-dev
     networks:
       - pycont-net
-    ports:
-      - "8082:8080"
     restart: always
     stdin_open: true
     tty: true
