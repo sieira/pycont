@@ -106,9 +106,9 @@ services:
     command: npm start
     container_name: pycont-ui
     environment:
-      - REACT_APP_API_HOST=http://pycont-api:8080/
-      - REACT_APP_API_PATH=${API_PATH}
-      - NODE_ENV=${NODE_ENV}
+      REACT_APP_API_HOST: http://pycont-api:8080/
+      REACT_APP_API_PATH: ${API_PATH}
+      NODE_ENV: ${NODE_ENV}
     expose:
       - "3000"
     image: pycont-ui
