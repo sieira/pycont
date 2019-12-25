@@ -38,7 +38,7 @@ it('should enable button when filled up', () => {
       <Login />
     </Provider>
   )
-  const usernameText = loginForm.find('input[type="username"]')
+  const usernameText = loginForm.find('input[type="text"]')
   const passwordText = loginForm.find('input[type="password"]')
   usernameText.simulate('change', { target: { value: 'Bazinga' } })
   passwordText.simulate('change', { target: { value: 'Spontiak!!' } })
@@ -55,7 +55,7 @@ it('Should call login when button clicked', () => {
       <Login />
     </Provider>
   )
-  const usernameText = loginForm.find('input[type="username"]')
+  const usernameText = loginForm.find('input[type="text"]')
   const passwordText = loginForm.find('input[type="password"]')
   usernameText.simulate('change', { target: { value: 'Bazinga' } })
   passwordText.simulate('change', { target: { value: 'Spontiak!!' } })

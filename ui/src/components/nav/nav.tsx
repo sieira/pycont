@@ -1,63 +1,61 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
 
-import { AuthState, User } from '../../store/auth/types'
+import { Navbar, Nav } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+
+import { logout } from '../../store/auth/actions'
+import { AuthState } from '../../store/auth/types'
 
 interface Props {
   isAuthenticated: boolean | null
-  user: User | null
+  logoutConnect: () => void
 }
 
-const Nav: React.FunctionComponent<Props> = ({
+const MainNav: React.FunctionComponent<Props> = ({
   isAuthenticated,
-  user
+  logoutConnect
 }: Props) => {
+  const brandLinkHref = isAuthenticated ? '/home' : '/'
+
   const logInOut = isAuthenticated ? (
-    <li>
-      <NavLink to="/logout">Log out</NavLink>
-    </li>
+    <Nav.Link onClick={logoutConnect}>Log out</Nav.Link>
   ) : (
-    <li>
-      <NavLink to="/login">Log in</NavLink>
-    </li>
+    <LinkContainer to="/login">
+      <Nav.Link>Log in</Nav.Link>
+    </LinkContainer>
   )
 
   const mainLinks = isAuthenticated ? (
-    <li>
-      <NavLink to="/home">Home</NavLink>
-    </li>
+    <LinkContainer to="/home">
+      <Nav.Link>Home</Nav.Link>
+    </LinkContainer>
   ) : (
-    <>
-      <li>
-        <NavLink to="/">Landing</NavLink>
-      </li>
-      <li>
-        <NavLink to="/about">About</NavLink>
-      </li>
-    </>
+    <LinkContainer to="/">
+      <Nav.Link>Landing</Nav.Link>
+    </LinkContainer>
   )
 
   return (
-    <>
-      <p>
-        Auth state:{' '}
-        {isAuthenticated ? `Logged in user: ${user?.username}` : 'Logged out'}
-      </p>
-      <ul>
+    <Navbar bg="dark" variant="dark">
+      <Navbar.Brand href={brandLinkHref}>🍺 Pycont</Navbar.Brand>
+      <Nav>
         {mainLinks}
-        <li>
-          <NavLink to="/terms">Terms</NavLink>
-        </li>
-        {logInOut}
-      </ul>
-    </>
+        <LinkContainer to="/terms">
+          <Nav.Link>Terms</Nav.Link>
+        </LinkContainer>
+      </Nav>
+      <Navbar.Collapse className="justify-content-end">
+        <Nav>{logInOut}</Nav>
+      </Navbar.Collapse>
+    </Navbar>
   )
 }
 
-const mapStateToProps = (state: AuthState): Props => ({
-  isAuthenticated: state.isAuthenticated,
-  user: state.currentUser
+const mapStateToProps = (state: AuthState) => ({
+  isAuthenticated: state.isAuthenticated
 })
 
-export default connect(mapStateToProps)(Nav)
+const mapDispatchToProps = { logoutConnect: logout }
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainNav)
