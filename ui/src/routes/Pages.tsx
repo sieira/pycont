@@ -13,7 +13,7 @@ const Pages = (): JSX.Element => (
   <Switch>
     <LoggedInRoute path="/home" exact component={Home} />
     <LoggedOutRoute path="/login" exact component={Login} />
-    <Route path="/" exact component={Landing} />
+    <LoggedOutRoute path="/" exact component={Landing} />
     <Route component={NotFound} />
   </Switch>
 )
