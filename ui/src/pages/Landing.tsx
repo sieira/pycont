@@ -11,7 +11,7 @@ const Landing: React.FC = () => (
         <span role="img" aria-label="beer">
           🍺 Edit
         </span>
-        and save to reload.
+        &nbsp;and save to reload.
         <br />
         <a href="/login">Let me in</a>
       </p>

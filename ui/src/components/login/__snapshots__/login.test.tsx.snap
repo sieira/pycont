@@ -21,7 +21,7 @@ exports[`should render without crashing 1`] = `
         className="form-control"
         id="username"
         onChange={[Function]}
-        type="username"
+        type="text"
         value=""
       />
     </div>

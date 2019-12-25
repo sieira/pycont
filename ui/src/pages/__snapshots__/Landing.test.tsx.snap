@@ -19,7 +19,7 @@ exports[`Landing should render without crashing 1`] = `
       >
         🍺 Edit
       </span>
-      and save to reload.
+       and save to reload.
       <br />
       <a
         href="/login"

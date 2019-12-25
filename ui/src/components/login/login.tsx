@@ -31,7 +31,7 @@ const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
           <FormLabel>Username</FormLabel>
           <FormControl
             autoFocus
-            type="username"
+            type="text"
             value={username}
             onChange={(e: FormEvent): void =>
               setUsername((e.target as HTMLInputElement).value)
