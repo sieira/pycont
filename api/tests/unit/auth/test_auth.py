@@ -7,7 +7,8 @@ from pycont.apps.users.serializers import UserSerializer
 
 
 class AuthTest(APITestCase):
-    fixtures = ['users']
+    def setUp(self):
+        User.objects.create_user('sieira', password='Pa$$word1234')
 
     def test_should_return_user_profile(self):
         response = self.client.post(
@@ -40,8 +41,8 @@ class AuthTest(APITestCase):
         )
         response = self.client.post('/auth/delete/')
         self.assertEqual(response.status_code, HTTP_200_OK)
-        self.assertEqual(self.client.cookies['Authorization'], '')
-        self.assertEqual(self.client.cookies['Authorization_refresh'], '')
+        self.assertEqual(self.client.cookies['Authorization'].value, '')
+        self.assertEqual(self.client.cookies['Authorization_refresh'].value, '')
         response = self.client.get('/profile/')
         self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
 
