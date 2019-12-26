@@ -9,6 +9,7 @@ import {
   checkAuth
 } from './actions'
 import { AUTHENTICATE, UNAUTHENTICATE } from './constants'
+import { mockLoggedOut, mockLoggedIn } from '../../test-utils/auth.test'
 
 //mock store
 const mockStore = configureMockStore([thunkMiddleware])
@@ -58,34 +59,9 @@ describe('Auth actions', () => {
   })
 
   it('checkAuth checks auth when logged out', () => {
-    fetch.mockResponseOnce('UNAUTHORIZED', { status: 401 })
+    mockLoggedOut()
     actionChecker([unauthenticate()])
     store.dispatch(checkAuth())
-  })
-
-  it('checkAuth checks auth when logged in', () => {
-    fetch.mockResponses(
-      [JSON.stringify({ user: { username: 'optimus' } })],
-      [JSON.stringify({ username: 'optimus' })]
-    )
-    store.dispatch(login('optimus', 'prime')).then(() => {
-      actionChecker([
-        authenticate({ username: 'optimus' }),
-        authenticate({ username: 'optimus' })
-      ])
-      store.dispatch(checkAuth())
-    })
-  })
-
-  it('checkAuth logs out when expired', () => {
-    fetch.mockResponses(
-      [JSON.stringify({ user: { username: 'optimus' } })],
-      ['Reponse', { status: 401 }]
-    )
-    store.dispatch(login('optimus', 'prime')).then(() => {
-      actionChecker([authenticate({ username: 'optimus' }), unauthenticate()])
-      store.dispatch(checkAuth())
-    })
   })
 
   it('Failed login unauthenticates', () => {

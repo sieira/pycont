@@ -13,3 +13,4 @@ configure({ adapter: new Adapter() })
 expect.extend(extendExpect)
 
 global.fetch = jestFetchMock
+jestFetchMock.enableMocks()
