@@ -1,8 +1,11 @@
 import { Action } from 'redux'
 import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
+import fetchIntercept from 'fetch-intercept'
+
 import * as constants from './constants'
 import { User } from './types'
+import store from '../store'
 
 export interface Authenticate {
   type: constants.AUTHENTICATE
@@ -79,7 +82,7 @@ export function refreshAuth() {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
-      },
+      }
     }).then(function(response) {
       if (response.status !== 200) {
         dispatch(logout())
@@ -103,11 +106,19 @@ export function checkAuth() {
       },
       method: 'GET'
     }).then(function(resp) {
-      if (resp.status !== 200) {
-        dispatch(refreshAuth())
-      } else {
+      if (resp.status === 200) {
         resp.json().then(data => dispatch(authenticate(data)))
       }
     })
   }
 }
+
+fetchIntercept.register({
+  response: function(response) {
+    const pathname = new URL(response.url).pathname
+    if (response.status == 401 && pathname !== '/api/auth/refresh/') {
+      store.dispatch(refreshAuth())
+    }
+    return response
+  }
+})
