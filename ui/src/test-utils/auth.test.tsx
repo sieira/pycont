@@ -1,8 +1,23 @@
-export function mockLoggedOut() {
-  fetch.doMock('api/profile/').mockResponse('UNAUTHORIZED', { status: 401})
-  fetch.doMock('api/auth/refresh/').mockResponse('UNAUTHORIZED', { status: 401})
+export function mockLoggedOut(canRefresh = false, user?) {
+  user = user || { username: 'Oompa Loompa' }
+
+  const mockProfile = fetch.mockOnceIf('api/profile/', 'UNAUTHORIZED', {
+    status: 401
+  })
+
+  if (canRefresh) {
+    return mockProfile.mockOnceIf('api/auth/refresh/', JSON.stringify(user), {
+      status: 200
+    })
+  } else {
+    return mockProfile.mockOnceIf('api/auth/refresh/', 'UNAUTHORIZED', {
+      status: 401
+    })
+  }
 }
 
-export function mockLoggedIn(user) {
-  fetch.doMock('api/profile/').mockResponse(JSON.stringify(user), { status: 200})
+export function mockLoggedIn(user?) {
+  user = user || { username: 'Willy Wonka' }
+
+  return fetch.mockOnceIf('api/profile/', JSON.stringify(user), { status: 200 })
 }

@@ -43,13 +43,13 @@ describe('Auth actions', () => {
   it('Login authenticates', () => {
     fetch.mockResponseOnce(JSON.stringify({ user: { username: 'optimus' } }))
     actionChecker([authenticate({ username: 'optimus' })])
-    store.dispatch(login('optimus', 'prime'))
+    store.dispatch(() => login('optimus', 'prime'))
   })
 
   it('Logout unauthenticates', () => {
     fetch.mockResponseOnce()
     actionChecker([unauthenticate()])
-    store.dispatch(logout())
+    store.dispatch(logout)
   })
 
   it("Failed logout don't unauthenticate", async () => {
@@ -61,12 +61,18 @@ describe('Auth actions', () => {
   it('checkAuth checks auth when logged out', () => {
     mockLoggedOut()
     actionChecker([unauthenticate()])
-    store.dispatch(checkAuth())
+    store.dispatch(checkAuth)
+  })
+
+  it('checkAuth checks auth when logged in', () => {
+    mockLoggedIn({ username: 'Mary Poppins' })
+    actionChecker([authenticate({ username: 'Mary Poppins' })])
+    store.dispatch(checkAuth)
   })
 
   it('Failed login unauthenticates', () => {
     fetch.mockResponses(['You shall not pass', { status: 401 }])
     actionChecker([unauthenticate()])
-    store.dispatch(login('optimus', 'prime'))
+    store.dispatch(() => login('optimus', 'prime'))
   })
 })
