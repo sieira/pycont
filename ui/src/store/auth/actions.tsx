@@ -5,7 +5,7 @@ import fetchIntercept from 'fetch-intercept'
 
 import * as constants from './constants'
 import { User } from './types'
-import store from '../store'
+import store from '..'
 
 export interface Authenticate {
   type: constants.AUTHENTICATE
@@ -113,12 +113,16 @@ export function checkAuth() {
   }
 }
 
-fetchIntercept.register({
-  response: function(response) {
+export function refreshOn401(_store: any) {
+  return (response: any) => {
     const pathname = new URL(response.url).pathname
-    if (response.status == 401 && pathname !== '/api/auth/refresh/') {
-      store.dispatch(refreshAuth())
+    if (response.status === 401 && pathname !== '/api/auth/refresh/') {
+      _store.dispatch(refreshAuth())
     }
     return response
   }
+}
+
+fetchIntercept.register({
+  response: refreshOn401(store)
 })
