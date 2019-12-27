@@ -3,29 +3,31 @@ import thunkMiddleware from 'redux-thunk-recursion-detect'
 
 import {
   authenticate,
-  unauthenticate,
+  checkAuth,
   login,
   logout,
-  checkAuth
+  refreshAuth,
+  refreshOn401,
+  unauthenticate
 } from './actions'
 import { AUTHENTICATE, UNAUTHENTICATE } from './constants'
+import { mockLoggedOut, mockLoggedIn } from '../../test-utils/auth.test'
 
 //mock store
 const mockStore = configureMockStore([thunkMiddleware])
-const store = mockStore({ isAuthenticated: false })
 
 function actionChecker(actions) {
+  const store = mockStore({ isAuthenticated: false })
   const unsubscribe = store.subscribe(() => {
     unsubscribe()
     expect(store.getActions()).toEqual(actions)
   })
-  return unsubscribe
+  return store
 }
 
 describe('Auth actions', () => {
   beforeEach(() => {
     fetch.resetMocks()
-    store.clearActions()
   })
 
   it('Authenticates to authenticate state', () => {
@@ -41,56 +43,79 @@ describe('Auth actions', () => {
 
   it('Login authenticates', () => {
     fetch.mockResponseOnce(JSON.stringify({ user: { username: 'optimus' } }))
-    actionChecker([authenticate({ username: 'optimus' })])
+    const store = actionChecker([authenticate({ username: 'optimus' })])
     store.dispatch(login('optimus', 'prime'))
   })
 
   it('Logout unauthenticates', () => {
     fetch.mockResponseOnce()
-    actionChecker([unauthenticate()])
+    const store = actionChecker([unauthenticate()])
     store.dispatch(logout())
   })
 
   it("Failed logout don't unauthenticate", async () => {
+    const store = mockStore({ isAuthenticated: false })
     fetch.mockResponseOnce('Shit happened', { status: 500 })
     await expect(store.dispatch(logout())).rejects.toThrow()
     expect(store.getActions()).toEqual([])
   })
 
-  it('checkAuth checks auth when logged out', () => {
-    fetch.mockResponseOnce('UNAUTHORIZED', { status: 401 })
-    actionChecker([unauthenticate()])
+  it('checkAuth authenticates when logged in', () => {
+    mockLoggedIn({ username: 'Mary Poppins' })
+    const store = actionChecker([authenticate({ username: 'Mary Poppins' })])
     store.dispatch(checkAuth())
-  })
-
-  it('checkAuth checks auth when logged in', () => {
-    fetch.mockResponses(
-      [JSON.stringify({ user: { username: 'optimus' } })],
-      [JSON.stringify({ username: 'optimus' })]
-    )
-    store.dispatch(login('optimus', 'prime')).then(() => {
-      actionChecker([
-        authenticate({ username: 'optimus' }),
-        authenticate({ username: 'optimus' })
-      ])
-      store.dispatch(checkAuth())
-    })
-  })
-
-  it('checkAuth logs out when expired', () => {
-    fetch.mockResponses(
-      [JSON.stringify({ user: { username: 'optimus' } })],
-      ['Reponse', { status: 401 }]
-    )
-    store.dispatch(login('optimus', 'prime')).then(() => {
-      actionChecker([authenticate({ username: 'optimus' }), unauthenticate()])
-      store.dispatch(checkAuth())
-    })
   })
 
   it('Failed login unauthenticates', () => {
     fetch.mockResponses(['You shall not pass', { status: 401 }])
-    actionChecker([unauthenticate()])
+    const store = actionChecker([unauthenticate()])
     store.dispatch(login('optimus', 'prime'))
+  })
+
+  it('Failed refresh unauthenticates', () => {
+    fetch.mockResponses(['You shall not pass', { status: 401 }])
+    const store = actionChecker([unauthenticate()])
+    store.dispatch(refreshAuth())
+  })
+
+  it('Successful refresh authenticates', () => {
+    fetch.mockResponseOnce(
+      JSON.stringify({ user: { username: 'Ignatius Farray' } }),
+      { status: 200 }
+    )
+    const store = actionChecker([authenticate({ username: 'Ignatius Farray' })])
+    store.dispatch(refreshAuth())
+  })
+
+  it('Dispatches refresh on 401', () => {
+    const user = { user: { username: 'Freddy Mercury' } }
+    const store = actionChecker([authenticate(user.user)])
+    const expectedResponse = {
+      status: 401,
+      url: 'https://somehost.foo/somepath'
+    }
+    fetch.mockResponseOnce(JSON.stringify(user))
+    const response = refreshOn401(store)(expectedResponse)
+    expect(response).toEqual(expectedResponse)
+  })
+
+  it('Avoid infinite recursion', () => {
+    const store = actionChecker([])
+    const expectedResponse = {
+      status: 401,
+      url: 'https://somehost.foo/api/auth/refresh/'
+    }
+    const response = refreshOn401(store)(expectedResponse)
+    expect(response).toEqual(expectedResponse)
+  })
+
+  it('Does nothing on not 401', () => {
+    const store = actionChecker([])
+    const expectedResponse = {
+      status: 200,
+      url: 'https://somehost.foo/foo/bar/clan/'
+    }
+    const response = refreshOn401(store)(expectedResponse)
+    expect(response).toEqual(expectedResponse)
   })
 })
