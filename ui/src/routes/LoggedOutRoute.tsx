@@ -11,7 +11,7 @@ const LoggedOutRoute = authStateRouteFactory(
   <footer>Logger Out Footer</footer>
 )
 
-const mapStateToProps = (state: AuthState) => ({
+const mapStateToProps = (state: AuthState): AuthState => ({
   isAuthenticated: state.isAuthenticated
 })
 

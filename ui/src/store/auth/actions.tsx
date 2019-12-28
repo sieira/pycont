@@ -113,8 +113,8 @@ export function checkAuth() {
   }
 }
 
-export function refreshOn401(_store: any) {
-  return (response: any) => {
+export function refreshOn401(_store: Store) {
+  return (response: T): T => {
     const pathname = new URL(response.url).pathname
     if (response.status === 401 && pathname !== '/api/auth/refresh/') {
       _store.dispatch(refreshAuth())

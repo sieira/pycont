@@ -8,9 +8,8 @@ import history from './history'
 import Pages from './routes/Pages'
 import MainNav from './components/nav'
 
-interface Props {
+interface Props extends AuthState {
   checkAuthConnect: () => void
-  isAuthenticated: boolean | null
 }
 
 const App: React.FunctionComponent<Props> = ({
@@ -32,7 +31,7 @@ const App: React.FunctionComponent<Props> = ({
   return <div className="App">{app}</div>
 }
 
-const mapStateToProps = (state: AuthState) => ({
+const mapStateToProps = (state: AuthState): Props => ({
   isAuthenticated: state.isAuthenticated
 })
 

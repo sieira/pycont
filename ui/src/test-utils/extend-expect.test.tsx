@@ -10,11 +10,19 @@ import { render } from '@testing-library/react'
 
 import Pages from '../routes/Pages'
 
+interface TestResult {
+  pass: boolean
+}
+
 //mock store
 const mockStore = configureMockStore([thunkMiddleware])
 
 // Extend expect
-export function toRedirect(path: string, dest: string, storeValues) {
+export function toRedirect(
+  path: string,
+  dest: string,
+  storeValues
+): TestResult {
   const history = createMemoryHistory()
   const store = mockStore(storeValues)
   history.push(path)
@@ -29,11 +37,11 @@ export function toRedirect(path: string, dest: string, storeValues) {
   return { pass: true }
 }
 
-export function toRequireLogin(path: string) {
+export function toRequireLogin(path: string): TestResult {
   return toRedirect(path, '/login', { isAuthenticated: false })
 }
 
-export function toRequireLogout(path: string) {
+export function toRequireLogout(path: string): TestResult {
   return toRedirect(path, '/home', { isAuthenticated: true })
 }
 

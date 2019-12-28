@@ -11,12 +11,12 @@ import {
   unauthenticate
 } from './actions'
 import { AUTHENTICATE, UNAUTHENTICATE } from './constants'
-import { mockLoggedOut, mockLoggedIn } from '../../test-utils/auth.test'
+import { mockLoggedIn } from '../../test-utils/auth.test'
 
 //mock store
 const mockStore = configureMockStore([thunkMiddleware])
 
-function actionChecker(actions) {
+function actionChecker(actions): Store {
   const store = mockStore({ isAuthenticated: false })
   const unsubscribe = store.subscribe(() => {
     unsubscribe()
