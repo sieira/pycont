@@ -9,6 +9,9 @@ import { AuthState } from '../../store/auth/types'
 
 interface Props {
   isAuthenticated: boolean | null
+}
+
+interface Props {
   logoutConnect: () => void
 }
 
@@ -52,7 +55,7 @@ const MainNav: React.FunctionComponent<Props> = ({
   )
 }
 
-const mapStateToProps = (state: AuthState) => ({
+const mapStateToProps = (state: AuthState): Props => ({
   isAuthenticated: state.isAuthenticated
 })
 

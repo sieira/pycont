@@ -4,5 +4,5 @@ export interface User {
 
 export interface AuthState {
   isAuthenticated: boolean | null
-  currentUser: User | null
+  currentUser?: User | null
 }

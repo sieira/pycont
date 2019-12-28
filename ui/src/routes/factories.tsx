@@ -11,6 +11,7 @@ export const authStateRouteFactory = (
 ): React.FC<AuthStateRouteProps> => ({
   component: Component,
   isAuthenticated,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ...otherProps
 }: AuthStateRouteProps): JSX.Element => {
   if (isAuthenticated !== authenticatedValue) {
