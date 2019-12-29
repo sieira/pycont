@@ -31,13 +31,9 @@ const rootReducer = (state, action): PycontState => {
   return appReducer(state, action)
 }
 
-const initialState = {
-  auth: { isAuthenticated: false }
-}
-
 const store = createStore(
   rootReducer,
-  initialState,
+  undefined,
   composeEnhancers(applyMiddleware(thunkMiddleware))
 )
 

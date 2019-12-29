@@ -9,6 +9,7 @@ import { createMemoryHistory } from 'history'
 import { render } from '@testing-library/react'
 
 import { defaultStoreState } from './store.test'
+import { PycontState } from '../store/types'
 
 import Pages from '../routes/Pages'
 
@@ -23,7 +24,7 @@ const mockStore = configureMockStore([thunkMiddleware])
 export function toRedirect(
   path: string,
   dest: string,
-  storeValues
+  storeValues: PycontState
 ): TestResult {
   const history = createMemoryHistory()
   const store = mockStore(storeValues)
