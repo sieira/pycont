@@ -1,4 +1,4 @@
-import { Action } from 'redux'
+import { Action, Store } from 'redux'
 import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
 import fetchIntercept from 'fetch-intercept'
@@ -113,8 +113,13 @@ export function checkAuth() {
   }
 }
 
+interface Response {
+  url: string
+  status: number
+}
+
 export function refreshOn401(_store: Store) {
-  return (response: T): T => {
+  return (response: Response): Response => {
     const pathname = new URL(response.url).pathname
     if (response.status === 401 && pathname !== '/api/auth/refresh/') {
       _store.dispatch(refreshAuth())

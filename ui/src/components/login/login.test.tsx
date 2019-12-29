@@ -10,7 +10,7 @@ import Login from '.'
 import * as actions from '../../store/auth/actions'
 
 const mockStore = configureMockStore([thunkMiddleware])
-const store = mockStore({})
+const store = mockStore({ auth: { isAuthenticated: false } })
 
 it('should render without crashing', () => {
   const loginForm = create(

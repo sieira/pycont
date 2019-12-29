@@ -8,6 +8,8 @@ import thunkMiddleware from 'redux-thunk-recursion-detect'
 import { createMemoryHistory } from 'history'
 import { render } from '@testing-library/react'
 
+import { defaultStoreState } from './store.test'
+
 import Pages from '../routes/Pages'
 
 interface TestResult {
@@ -38,11 +40,11 @@ export function toRedirect(
 }
 
 export function toRequireLogin(path: string): TestResult {
-  return toRedirect(path, '/login', { isAuthenticated: false })
+  return toRedirect(path, '/login', defaultStoreState())
 }
 
 export function toRequireLogout(path: string): TestResult {
-  return toRedirect(path, '/home', { isAuthenticated: true })
+  return toRedirect(path, '/home', defaultStoreState(true))
 }
 
 export default {

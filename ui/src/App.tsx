@@ -1,21 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Router } from 'react-router-dom'
+
 import { checkAuth } from './store/auth/actions'
-import { AuthState } from './store/auth/types'
+import { PycontState } from './store/types'
 
 import history from './history'
 import Pages from './routes/Pages'
 import MainNav from './components/nav'
 
-interface Props extends AuthState {
+interface StateProps {
+  isAuthenticated: boolean | null
+}
+
+interface DispatchProps {
   checkAuthConnect: () => void
 }
 
-const App: React.FunctionComponent<Props> = ({
+const App: React.FunctionComponent<StateProps & DispatchProps> = ({
   checkAuthConnect,
   isAuthenticated
-}: Props) => {
+}: StateProps & DispatchProps) => {
   React.useEffect(() => {
     checkAuthConnect()
   }, [])
@@ -24,15 +29,17 @@ const App: React.FunctionComponent<Props> = ({
     isAuthenticated !== null ? (
       <Router history={history}>
         <MainNav />
-        <Route component={Pages} />
+        <main>
+          <Route component={Pages} />
+        </main>
       </Router>
     ) : null
 
   return <div className="App">{app}</div>
 }
 
-const mapStateToProps = (state: AuthState): Props => ({
-  isAuthenticated: state.isAuthenticated
+const mapStateToProps = (state: PycontState): StateProps => ({
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 const mapDispatchToProps = {

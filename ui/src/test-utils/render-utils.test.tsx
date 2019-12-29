@@ -5,9 +5,11 @@ import { MemoryRouter } from 'react-router'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk-recursion-detect'
 
-export function createWithProvider(element, authState): TestRenderer {
+import { defaultStoreState } from './store.test'
+
+export function createWithProvider(element, state): TestRenderer {
   const mockStore = configureMockStore([thunkMiddleware])
-  const store = mockStore(authState)
+  const store = mockStore(state || defaultStoreState())
   return create(
     <Provider store={store}>
       <MemoryRouter>{element}</MemoryRouter>

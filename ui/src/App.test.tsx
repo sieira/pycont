@@ -14,7 +14,7 @@ describe('App tests', () => {
   })
 
   it('renders without crashing', () => {
-    const store = mockStore({ isAuthenticated: false })
+    const store = mockStore({ auth: { isAuthenticated: false }, accounts: {} })
     const div = document.createElement('div')
     fetch.mockResponseOnce('UNAUTHORIZED', { status: 401 })
     ReactDOM.render(
@@ -27,7 +27,7 @@ describe('App tests', () => {
   })
 
   it('renders without crashing on isAuthenticated null', () => {
-    const store = mockStore({ isAuthenticated: null })
+    const store = mockStore({ auth: { isAuthenticated: null } })
     const div = document.createElement('div')
     fetch.mockResponseOnce('UNAUTHORIZED', { status: 401 })
     ReactDOM.render(

@@ -1,34 +1,26 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 
-import { AuthStateRouteProps } from './types'
+import { AuthStateRouteProps, RouteProps } from './types'
 
 export const authStateRouteFactory = (
   authenticatedValue: boolean,
-  defaultFallbackRoute: string,
-  routeHeader: JSX.Element,
-  routeFooter: JSX.Element
-): React.FC<AuthStateRouteProps> => ({
+  defaultFallbackRoute: string
+): React.FC<AuthStateRouteProps & RouteProps> => ({
   component: Component,
-  isAuthenticated,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ...otherProps
-}: AuthStateRouteProps): JSX.Element => {
+  isAuthenticated
+}: AuthStateRouteProps & RouteProps): JSX.Element => {
   if (isAuthenticated !== authenticatedValue) {
     return <Redirect push to={defaultFallbackRoute} />
   }
 
   return (
-    <>
-      {routeHeader}
-      <Route
-        render={(otherProps): JSX.Element => (
-          <>
-            <Component {...otherProps} />
-          </>
-        )}
-      />
-      {routeFooter}
-    </>
+    <Route
+      render={(otherProps): JSX.Element => (
+        <>
+          <Component />
+        </>
+      )}
+    />
   )
 }
