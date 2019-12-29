@@ -81,7 +81,9 @@
     "coveragePathIgnorePatterns": [
       "src/serviceWorker.ts"
     ],
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "prettier": {
     "singleQuote": true,
