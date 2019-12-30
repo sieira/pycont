@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
-import { Spinner } from 'react-bootstrap'
+import { Spinner, ListGroup } from 'react-bootstrap'
 
 import { PycontState } from '../../store/types'
 import { Account } from '../../store/accounts/types'
@@ -27,11 +27,16 @@ class AccountList extends React.Component<StateProps & DispatchProps> {
   render() {
     return (
       <>
+        <h2>Accounts</h2>
         <div aria-busy={!this.props.fetched} aria-live="polite">
           {!this.props.fetched ? (
             <Spinner animation="grow" variant="info" />
           ) : (
-            <p>{JSON.stringify(this.props.accounts)}</p>
+            <ListGroup>
+              {this.props.accounts.map(account => (
+                <ListGroup.Item key={account.id}>{account.name}</ListGroup.Item>
+              ))}
+            </ListGroup>
           )}
         </div>
       </>

@@ -24,7 +24,7 @@ const appReducer = combineReducers({
   accounts: accountsReducer
 })
 
-const rootReducer = (state, action): PycontState => {
+export const rootReducer = (state, action): PycontState => {
   if (action.type === UNAUTHENTICATE) {
     state = undefined
   }

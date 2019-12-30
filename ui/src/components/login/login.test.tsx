@@ -9,15 +9,14 @@ import { mount } from 'enzyme'
 import Login from '.'
 import * as actions from '../../store/auth/actions'
 
+import { createWithProvider } from '../../test-utils/render-utils.test'
+import { defaultStoreState } from '../../test-utils/store.test'
+
 const mockStore = configureMockStore([thunkMiddleware])
 const store = mockStore({ auth: { isAuthenticated: false } })
 
 it('should render without crashing', () => {
-  const loginForm = create(
-    <Provider store={store}>
-      <Login />
-    </Provider>
-  )
+  const loginForm = createWithProvider(<Login />, defaultStoreState(true))
   expect(loginForm.toJSON()).toMatchSnapshot()
 })
 
