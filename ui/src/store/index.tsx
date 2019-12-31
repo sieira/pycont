@@ -1,7 +1,10 @@
-import { applyMiddleware, compose, createStore } from 'redux'
+import { applyMiddleware, compose, createStore, combineReducers } from 'redux'
 import thunkMiddleware from 'redux-thunk-recursion-detect'
 
-import authReducer from './auth/reducers'
+import { UNAUTHENTICATE } from './auth/constants'
+import authReducer from './auth/reducer'
+import accountsReducer from './accounts/reducer'
+import { PycontState } from './types'
 
 let composeEnhancers
 
@@ -16,8 +19,20 @@ if (
   composeEnhancers = compose
 }
 
+const appReducer = combineReducers({
+  auth: authReducer,
+  accounts: accountsReducer
+})
+
+export const rootReducer = (state, action): PycontState => {
+  if (action.type === UNAUTHENTICATE) {
+    state = undefined
+  }
+  return appReducer(state, action)
+}
+
 const store = createStore(
-  authReducer,
+  rootReducer,
   undefined,
   composeEnhancers(applyMiddleware(thunkMiddleware))
 )

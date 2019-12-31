@@ -4,7 +4,7 @@ import { AuthState } from './types'
 
 export default function authReducer(
   state: AuthState = {
-    isAuthenticated: null,
+    isAuthenticated: false,
     currentUser: null
   },
   action: Authenticate | Unauthenticate

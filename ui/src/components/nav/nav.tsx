@@ -1,24 +1,24 @@
-import * as React from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import { Navbar, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import { logout } from '../../store/auth/actions'
-import { AuthState } from '../../store/auth/types'
+import { PycontState } from '../../store/types'
 
-interface Props {
-  isAuthenticated: boolean | null
+interface StateProps {
+  isAuthenticated: boolean
 }
 
-interface Props {
+interface DispatchProps {
   logoutConnect: () => void
 }
 
-const MainNav: React.FunctionComponent<Props> = ({
+const MainNav: React.FunctionComponent<StateProps & DispatchProps> = ({
   isAuthenticated,
   logoutConnect
-}: Props) => {
+}: StateProps & DispatchProps) => {
   const brandLinkHref = isAuthenticated ? '/home' : '/'
 
   const logInOut = isAuthenticated ? (
@@ -55,8 +55,8 @@ const MainNav: React.FunctionComponent<Props> = ({
   )
 }
 
-const mapStateToProps = (state: AuthState): Props => ({
-  isAuthenticated: state.isAuthenticated
+const mapStateToProps = (state: PycontState): StateProps => ({
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 const mapDispatchToProps = { logoutConnect: logout }

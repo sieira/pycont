@@ -1,18 +1,13 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { AuthState } from '../store/auth/types'
+import { PycontState } from '../store/types'
 import { authStateRouteFactory } from './factories'
+import { AuthStateRouteProps } from './types'
 
-const LoggedOutRoute = authStateRouteFactory(
-  false,
-  '/home',
-  <header>Logged Out Header</header>,
-  <footer>Logger Out Footer</footer>
-)
+const LoggedOutRoute = authStateRouteFactory(false, '/home')
 
-const mapStateToProps = (state: AuthState): AuthState => ({
-  isAuthenticated: state.isAuthenticated
+const mapStateToProps = (state: PycontState): AuthStateRouteProps => ({
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps)(LoggedOutRoute)

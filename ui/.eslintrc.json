@@ -13,7 +13,10 @@
   ],
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
+    "SharedArrayBuffer": "readonly",
+    "shallow": "readonly",
+    "render": "readonly",
+    "mount": "readonly"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

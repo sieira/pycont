@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders without crashing 1`] = `
-<h1>
-  You are in the home page
-</h1>
+<Fragment>
+  <h1>
+    You are in the home page
+  </h1>
+  <Connect(AccountList) />
+</Fragment>
 `;

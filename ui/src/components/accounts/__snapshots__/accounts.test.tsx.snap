@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accounts tests Should show accounts if fetched 1`] = `
+Array [
+  <h2>
+    Accounts
+  </h2>,
+  <div
+    aria-busy={false}
+    aria-live="polite"
+  >
+    <div
+      className="list-group"
+      onKeyDown={[Function]}
+    >
+      <div
+        className="list-group-item"
+        data-rb-event-key={null}
+        disabled={false}
+        onClick={[Function]}
+      >
+        Account1
+      </div>
+      <div
+        className="list-group-item"
+        data-rb-event-key={null}
+        disabled={false}
+        onClick={[Function]}
+      >
+        Account2
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Accounts tests Should show loader if not fetched 1`] = `
+Array [
+  <h2>
+    Accounts
+  </h2>,
+  <div
+    aria-busy={true}
+    aria-live="polite"
+  >
+    <div
+      className="spinner-grow text-info"
+    />
+  </div>,
+]
+`;

@@ -1,9 +1,11 @@
 import React, { useState, FormEvent } from 'react'
+import { Action } from 'redux'
 import { connect } from 'react-redux'
+import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
 import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap'
 
-import { login } from '../../store/auth/actions'
+import { AuthenticationAction, login } from '../../store/auth/actions'
 
 import './login.css'
 
@@ -56,8 +58,10 @@ const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
   )
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): Props => ({
-  loginConnect: (username: string, password: string): void =>
+const mapDispatchToProps = (
+  dispatch: Dispatch<AuthenticationAction, Record<string, any>, Action>
+): Props => ({
+  loginConnect: (username: string, password: string): Promise<void> =>
     dispatch(login(username, password))
 })
 

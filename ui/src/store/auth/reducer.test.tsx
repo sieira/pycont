@@ -1,4 +1,4 @@
-import authReducer from './reducers'
+import authReducer from './reducer'
 import { authenticate, unauthenticate } from './actions'
 
 it('Should reduce on authenticate', () => {

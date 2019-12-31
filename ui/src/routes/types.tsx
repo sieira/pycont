@@ -1,8 +1,11 @@
-import * as React from 'react'
+import React from 'react'
 
 export interface AuthStateRouteProps {
-  exact?: boolean
   isAuthenticated: boolean | null
+}
+
+export interface RouteProps {
+  exact?: boolean
   path: string
-  component: React.ComponentType
+  component: React.ComponentType<any>
 }
