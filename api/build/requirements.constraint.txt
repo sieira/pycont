@@ -5,7 +5,7 @@ certifi==2019.11.28
 chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
-coverage==5.0
+coverage==5.0.1
 decorator==4.4.1
 Django==3.0.1
 django-mysql==3.3.0
@@ -13,7 +13,7 @@ djangorestframework==3.11.0
 drf-yasg==1.17.0
 idna==2.8
 inflection==0.3.1
-ipython==7.10.2
+ipython==7.11.0
 ipython-genutils==0.2.0
 isort==4.3.21
 itypes==1.1.0
@@ -36,7 +36,7 @@ PyJWT==1.7.1
 pylint==2.4.4
 pylint-django==2.0.13
 pylint-plugin-utils==0.6
-pyparsing==2.4.5
+pyparsing==2.4.6
 pytz==2019.3
 requests==2.22.0
 ruamel.yaml==0.16.5
@@ -46,5 +46,6 @@ sqlparse==0.3.0
 traitlets==4.3.3
 uritemplate==3.0.1
 urllib3==1.25.7
+uWSGI==2.0.18
 wcwidth==0.1.7
 wrapt==1.11.2
