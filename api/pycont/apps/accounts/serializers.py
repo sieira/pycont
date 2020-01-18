@@ -6,4 +6,4 @@ from pycont.apps.accounts.models import Account
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'currency', 'balance')

@@ -1,13 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from pycont.utils import PycontModel
+from pycont.utils import PycontModel, CURRENCIES
 from pycont.apps.accounts.models import Account
-
-CURRENCIES = {
-    'USD': 'United States Dollars',
-    'EUR': 'Euros',
-}
 
 
 class Transaction(PycontModel):
