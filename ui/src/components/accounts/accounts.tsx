@@ -7,6 +7,7 @@ import { Spinner, ListGroup } from 'react-bootstrap'
 import { PycontState } from '../../store/types'
 import { Account } from '../../store/accounts/types'
 import { fetchAccounts } from '../../store/accounts/actions'
+import AccountSummary from './account-summary'
 
 interface StateProps {
   accounts: Account[]
@@ -34,7 +35,9 @@ class AccountList extends React.Component<StateProps & DispatchProps> {
           ) : (
             <ListGroup>
               {this.props.accounts.map(account => (
-                <ListGroup.Item key={account.id}>{account.name}</ListGroup.Item>
+                <ListGroup.Item key={account.id}>
+                  <AccountSummary account={account} />
+                </ListGroup.Item>
               ))}
             </ListGroup>
           )}
