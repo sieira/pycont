@@ -3,7 +3,13 @@ import { Action } from 'redux'
 import { connect } from 'react-redux'
 import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
-import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap'
+import {
+  Form,
+  Button,
+  FormGroup,
+  FormControl,
+  FormLabel
+} from 'react-bootstrap'
 
 import { AuthenticationAction, login } from '../../store/auth/actions'
 
@@ -28,7 +34,7 @@ const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
 
   return (
     <div className="Login">
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <FormGroup controlId="username">
           <FormLabel>Username</FormLabel>
           <FormControl
@@ -53,7 +59,7 @@ const Login: React.FunctionComponent<Props> = ({ loginConnect }: Props) => {
         <Button block disabled={!validateForm()} type="submit">
           Login
         </Button>
-      </form>
+      </Form>
     </div>
   )
 }
