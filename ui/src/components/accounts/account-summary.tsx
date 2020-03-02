@@ -1,8 +1,8 @@
 import React from 'react'
-import { useState } from 'react'
+import { Action } from 'redux'
 import { connect } from 'react-redux'
 import { Account } from '../../store/accounts/types'
-import { Spinner, Form } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from 'react-bootstrap'
 import { patchAccount } from '../../store/accounts/actions'
@@ -28,47 +28,46 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  toggleEdit() {
+  toggleEdit(): void {
     this.setState({ isEditing: !this.state.isEditing })
   }
 
   handleSubmit(event: FormEvent): void {
     event.preventDefault()
     // Guess what has changed
-    let _this = this
     const diff = Object.keys(this.props.account).reduce(
-      function(obj, key) {
+      (obj, key) => {
         if (
-          _this.state.hasOwnProperty(key) &&
-          _this.props.account[key] !== _this.state[key]
+          {}.hasOwnProperty.call(this.state) &&
+          this.props.account[key] !== this.state[key]
         ) {
-          obj[key] = _this.state[key]
+          obj[key] = this.state[key]
         }
         return obj
       },
-      { id: _this.props.account.id }
+      { id: this.props.account.id }
     )
     this.props.patchData(diff)
   }
 
-  renderTextbox(value, stateMapping) {
+  renderTextbox(value, onChange): JSX.Element {
     return (
       <Form.Group>
-        <Form.Control
-          type="text"
-          value={value}
-          onChange={e => this.setState({ stateMapping: e.target.value })}
-        />
+        <Form.Control type="text" value={value} onChange={onChange} />
       </Form.Group>
     )
   }
 
-  render() {
+  render(): JSX.Element {
     return this.state.isEditing ? (
       <Form onSubmit={this.handleSubmit}>
         <Form.Row>
-          {this.renderTextbox(this.state.name, 'name')}
-          {this.renderTextbox(this.state.balance, 'balance')}
+          {this.renderTextbox(this.state.name, (e: JSX.Element): void =>
+            this.setState({ name: e.target.value })
+          )}
+          {this.renderTextbox(this.state.balance, (e: JSX.Element): void =>
+            this.setState({ balance: e.target.value })
+          )}
           <Button type="submit">
             <FontAwesomeIcon icon="check-square" />
           </Button>
@@ -90,9 +89,10 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
 }
 
 const mapDispatchToProps = (
-  dispatch: Dispatch<PycontState, any, any>
+  dispatch: Dispatch<PycontState, {}, Action>
 ): DispatchProps => ({
-  patchData: account => dispatch(patchAccount(account))
+  patchData: (account: Account): Promise<void> =>
+    dispatch(patchAccount(account))
 })
 
 export default connect(null, mapDispatchToProps)(AccountSummary)

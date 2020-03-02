@@ -1,4 +1,5 @@
 import React from 'react'
+import { Action } from 'redux'
 import { connect } from 'react-redux'
 import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
@@ -25,7 +26,7 @@ class AccountList extends React.Component<StateProps & DispatchProps> {
     }
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <>
         <h2>Accounts</h2>
@@ -53,9 +54,9 @@ const mapStateToProps = (state: PycontState): StateProps => ({
 })
 
 const mapDispatchToProps = (
-  dispatch: Dispatch<PycontState, any, any>
+  dispatch: Dispatch<PycontState, {}, Action>
 ): DispatchProps => ({
-  fetchData: () => dispatch(fetchAccounts())
+  fetchData: (): Promise<void> => dispatch(fetchAccounts())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountList)
