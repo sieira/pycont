@@ -51,24 +51,24 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
     this.props.patchData(diff)
   }
 
+  renderTextbox(value, stateMapping) {
+    return (
+      <Form.Group>
+        <Form.Control
+          type="text"
+          value={value}
+          onChange={e => this.setState({ stateMapping: e.target.value })}
+        />
+      </Form.Group>
+    )
+  }
+
   render() {
     return this.state.isEditing ? (
       <Form onSubmit={this.handleSubmit}>
         <Form.Row>
-          <Form.Group>
-            <Form.Control
-              type="text"
-              value={this.state.name}
-              onChange={e => this.setState({ name: e.target.value })}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Control
-              type="text"
-              value={this.state.balance}
-              onChange={e => this.setState({ balance: e.target.value })}
-            />
-          </Form.Group>
+          {this.renderTextbox(this.state.name, 'name')}
+          {this.renderTextbox(this.state.balance, 'balance')}
           <Button type="submit">
             <FontAwesomeIcon icon="check-square" />
           </Button>
