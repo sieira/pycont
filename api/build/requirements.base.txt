@@ -1,7 +1,7 @@
 Django
 django-mysql
 djangorestframework
--e git+http://github.com/NiyazNz/django-rest-framework-simplejwt@jwt_cookie#egg=djangorestframework_simplejwt
+-e git+http://github.com/sieira/django-rest-framework-simplejwt@jwt_cookie#egg=djangorestframework_simplejwt
 drf-yasg
 mysqlclient
 uwsgi
