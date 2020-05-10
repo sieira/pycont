@@ -5,7 +5,7 @@ import { AccountsState } from './types'
 export default function acountsReducer(
   state: AccountsState = {
     accountList: [],
-    fetched: false
+    fetched: false,
   },
   action: Fetch
 ): AccountsState {

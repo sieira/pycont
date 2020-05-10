@@ -35,7 +35,7 @@ class AccountList extends React.Component<StateProps & DispatchProps> {
             <Spinner animation="grow" variant="info" />
           ) : (
             <ListGroup>
-              {this.props.accounts.map(account => (
+              {this.props.accounts.map((account) => (
                 <ListGroup.Item key={account.id}>
                   <AccountSummary account={account} />
                 </ListGroup.Item>
@@ -50,13 +50,13 @@ class AccountList extends React.Component<StateProps & DispatchProps> {
 
 const mapStateToProps = (state: PycontState): StateProps => ({
   accounts: state.accounts.accountList,
-  fetched: state.accounts.fetched
+  fetched: state.accounts.fetched,
 })
 
 const mapDispatchToProps = (
   dispatch: Dispatch<PycontState, {}, Action>
 ): DispatchProps => ({
-  fetchData: (): Promise<void> => dispatch(fetchAccounts())
+  fetchData: (): Promise<void> => dispatch(fetchAccounts()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountList)

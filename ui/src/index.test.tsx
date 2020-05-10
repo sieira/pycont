@@ -16,7 +16,7 @@ describe('Application root', () => {
 
   it('should render without crashing on redux devtools', () => {
     Object.defineProperty(global, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__', {
-      value: compose
+      value: compose,
     })
     expect(process.env.NODE_ENV).toBe('test')
     expect(typeof window).toBe('object')

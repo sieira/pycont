@@ -51,5 +51,5 @@ export function toRequireLogout(path: string): TestResult {
 export default {
   toRedirect,
   toRequireLogin,
-  toRequireLogout
+  toRequireLogout,
 }

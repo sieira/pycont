@@ -22,7 +22,7 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
     this.state = {
       isEditing: false,
       name: this.props.account.name,
-      balance: this.props.account.balance
+      balance: this.props.account.balance,
     }
     this.toggleEdit = this.toggleEdit.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -92,7 +92,7 @@ const mapDispatchToProps = (
   dispatch: Dispatch<PycontState, {}, Action>
 ): DispatchProps => ({
   patchData: (account: Account): Promise<void> =>
-    dispatch(patchAccount(account))
+    dispatch(patchAccount(account)),
 })
 
 export default connect(null, mapDispatchToProps)(AccountSummary)

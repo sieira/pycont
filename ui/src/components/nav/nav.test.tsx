@@ -12,9 +12,9 @@ it('renders logged in without crashing', () => {
   const navBar = createWithProvider(<Nav />, {
     auth: {
       isAuthenticated: true,
-      currentUser: { username: 'Schwarzenegger' }
+      currentUser: { username: 'Schwarzenegger' },
     },
-    accounts: {}
+    accounts: {},
   })
   expect(navBar.toJSON()).toMatchSnapshot()
 })

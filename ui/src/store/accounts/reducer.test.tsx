@@ -5,7 +5,7 @@ describe('Test accounts reducer', () => {
   it('Should reduce in fetchData', () => {
     expect(accountsReducer({}, fetchData([]))).toEqual({
       accountList: [],
-      fetched: true
+      fetched: true,
     })
   })
 })

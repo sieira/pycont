@@ -21,7 +21,7 @@ if (
 
 const appReducer = combineReducers({
   auth: authReducer,
-  accounts: accountsReducer
+  accounts: accountsReducer,
 })
 
 export const rootReducer = (state, action): PycontState => {

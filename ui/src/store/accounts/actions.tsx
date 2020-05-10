@@ -19,14 +19,14 @@ export interface Patch {
 export function fetchData(accounts: Account[]): Fetch {
   return {
     type: constants.FETCH,
-    payload: { accountList: accounts, fetched: true }
+    payload: { accountList: accounts, fetched: true },
   }
 }
 
 export function resetData(): Patch {
   return {
     type: constants.PATCH,
-    payload: { accountList: [], fetched: false }
+    payload: { accountList: [], fetched: false },
   }
 }
 
@@ -40,10 +40,10 @@ export function fetchAccounts() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
-      }
-    }).then(function(response) {
-      response.json().then(data => {
+        Accept: 'application/json',
+      },
+    }).then(function (response) {
+      response.json().then((data) => {
         dispatch(fetchData(data))
       })
     })
@@ -59,11 +59,11 @@ export function patchAccount(account) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        'X-CSRFToken': new Cookies().get('csrftoken')
+        'X-CSRFToken': new Cookies().get('csrftoken'),
       },
-      body: JSON.stringify(account)
-    }).then(function(response) {
-      response.json().then(data => {
+      body: JSON.stringify(account),
+    }).then(function (response) {
+      response.json().then((data) => {
         dispatch(resetData())
         dispatch(fetchAccounts())
       })

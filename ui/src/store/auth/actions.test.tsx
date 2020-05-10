@@ -8,7 +8,7 @@ import {
   logout,
   refreshAuth,
   refreshOn401,
-  unauthenticate
+  unauthenticate,
 } from './actions'
 import { AUTHENTICATE, UNAUTHENTICATE } from './constants'
 import { mockLoggedIn } from '../../test-utils/auth.test'
@@ -33,7 +33,7 @@ describe('Auth actions', () => {
   it('Authenticates to authenticate state', () => {
     expect(authenticate({ username: 'Boris Johnson' })).toEqual({
       payload: { username: 'Boris Johnson' },
-      type: AUTHENTICATE
+      type: AUTHENTICATE,
     })
   })
 
@@ -92,7 +92,7 @@ describe('Auth actions', () => {
     const store = actionChecker([authenticate(user.user)])
     const expectedResponse = {
       status: 401,
-      url: 'https://somehost.foo/somepath'
+      url: 'https://somehost.foo/somepath',
     }
     fetch.mockResponseOnce(JSON.stringify(user))
     const response = refreshOn401(store)(expectedResponse)
@@ -103,7 +103,7 @@ describe('Auth actions', () => {
     const store = actionChecker([])
     const expectedResponse = {
       status: 401,
-      url: 'https://somehost.foo/api/auth/refresh/'
+      url: 'https://somehost.foo/api/auth/refresh/',
     }
     const response = refreshOn401(store)(expectedResponse)
     expect(response).toEqual(expectedResponse)
@@ -113,7 +113,7 @@ describe('Auth actions', () => {
     const store = actionChecker([])
     const expectedResponse = {
       status: 200,
-      url: 'https://somehost.foo/foo/bar/clan/'
+      url: 'https://somehost.foo/foo/bar/clan/',
     }
     const response = refreshOn401(store)(expectedResponse)
     expect(response).toEqual(expectedResponse)

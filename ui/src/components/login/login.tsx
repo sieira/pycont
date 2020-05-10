@@ -8,7 +8,7 @@ import {
   Button,
   FormGroup,
   FormControl,
-  FormLabel
+  FormLabel,
 } from 'react-bootstrap'
 
 import { AuthenticationAction, login } from '../../store/auth/actions'
@@ -68,7 +68,7 @@ const mapDispatchToProps = (
   dispatch: Dispatch<AuthenticationAction, Record<string, any>, Action>
 ): Props => ({
   loginConnect: (username: string, password: string): Promise<void> =>
-    dispatch(login(username, password))
+    dispatch(login(username, password)),
 })
 
 export default connect(null, mapDispatchToProps)(Login)

@@ -7,7 +7,7 @@ import { AuthStateRouteProps } from './types'
 const LoggedInRoute = authStateRouteFactory(true, '/login')
 
 const mapStateToProps = (state: PycontState): AuthStateRouteProps => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
 })
 
 export default connect(mapStateToProps)(LoggedInRoute)

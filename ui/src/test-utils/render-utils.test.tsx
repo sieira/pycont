@@ -18,5 +18,5 @@ export function createWithProvider(element, state): TestRenderer {
 }
 
 export default {
-  createWithProvider
+  createWithProvider,
 }

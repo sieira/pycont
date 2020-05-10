@@ -12,7 +12,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faTimes,
   faCheckSquare,
-  faPencilAlt
+  faPencilAlt,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faPencilAlt, faCheckSquare, faTimes)

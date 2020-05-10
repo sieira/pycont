@@ -12,7 +12,7 @@ describe('Account actions', () => {
   it('Sets fetched on fetchData', () => {
     expect(fetchData([])).toEqual({
       payload: { accountList: [], fetched: true },
-      type: FETCH
+      type: FETCH,
     })
   })
 
@@ -21,15 +21,15 @@ describe('Account actions', () => {
     const store = mockStore()
     const accounts = [{ name: 'Account1' }, { name: 'Account2' }]
     fetch.mockResponseOnce(JSON.stringify({ accounts: accounts }), {
-      status: 200
+      status: 200,
     })
     const unsubscribe = store.subscribe(() => {
       unsubscribe()
       expect(store.getActions()).toEqual([
         {
           type: FETCH,
-          payload: { accountList: { accounts: accounts }, fetched: true }
-        }
+          payload: { accountList: { accounts: accounts }, fetched: true },
+        },
       ])
     })
     store.dispatch(fetchAccounts())

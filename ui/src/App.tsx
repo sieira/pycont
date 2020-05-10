@@ -19,7 +19,7 @@ interface DispatchProps {
 
 const App: React.FunctionComponent<StateProps & DispatchProps> = ({
   checkAuthConnect,
-  isAuthenticated
+  isAuthenticated,
 }: StateProps & DispatchProps) => {
   React.useEffect(() => {
     checkAuthConnect()
@@ -39,11 +39,11 @@ const App: React.FunctionComponent<StateProps & DispatchProps> = ({
 }
 
 const mapStateToProps = (state: PycontState): StateProps => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
 })
 
 const mapDispatchToProps = {
-  checkAuthConnect: checkAuth
+  checkAuthConnect: checkAuth,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

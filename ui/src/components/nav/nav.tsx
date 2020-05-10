@@ -17,7 +17,7 @@ interface DispatchProps {
 
 const MainNav: React.FunctionComponent<StateProps & DispatchProps> = ({
   isAuthenticated,
-  logoutConnect
+  logoutConnect,
 }: StateProps & DispatchProps) => {
   const brandLinkHref = isAuthenticated ? '/home' : '/'
 
@@ -56,7 +56,7 @@ const MainNav: React.FunctionComponent<StateProps & DispatchProps> = ({
 }
 
 const mapStateToProps = (state: PycontState): StateProps => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
 })
 
 const mapDispatchToProps = { logoutConnect: logout }

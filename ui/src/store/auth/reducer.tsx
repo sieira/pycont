@@ -5,7 +5,7 @@ import { AuthState } from './types'
 export default function authReducer(
   state: AuthState = {
     isAuthenticated: false,
-    currentUser: null
+    currentUser: null,
   },
   action: Authenticate | Unauthenticate
 ): AuthState {
@@ -13,7 +13,7 @@ export default function authReducer(
     case AUTHENTICATE:
       return {
         isAuthenticated: true,
-        currentUser: action.payload
+        currentUser: action.payload,
       }
     case UNAUTHENTICATE:
       return { isAuthenticated: false, currentUser: null }
