@@ -65,7 +65,7 @@ export function patchAccount(account) {
     }).then(function(response) {
       response.json().then(data => {
         dispatch(resetData())
-        dispatch(fetchData())
+        dispatch(fetchAccounts())
       })
     })
   }
