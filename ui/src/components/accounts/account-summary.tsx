@@ -38,7 +38,7 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
     const diff = Object.keys(this.props.account).reduce(
       (obj, key) => {
         if (
-          {}.hasOwnProperty.call(this.state) &&
+          {}.hasOwnProperty.call(this.state, key) &&
           this.props.account[key] !== this.state[key]
         ) {
           obj[key] = this.state[key]

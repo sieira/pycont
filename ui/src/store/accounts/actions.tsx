@@ -1,3 +1,5 @@
+import Cookies from 'universal-cookie'
+
 import { Action } from 'redux'
 import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
@@ -56,7 +58,8 @@ export function patchAccount(account) {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
+        'X-CSRFToken': new Cookies().get('csrftoken')
       },
       body: JSON.stringify(account)
     }).then(function(response) {
