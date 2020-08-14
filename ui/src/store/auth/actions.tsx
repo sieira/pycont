@@ -122,12 +122,12 @@ export function refreshOn401(_store: Store) {
   return (response: Response): Response => {
     const pathname = new URL(response.url).pathname
     if (response.status === 401 && pathname !== '/api/auth/refresh/') {
-      _store.dispatch(refreshAuth())
+      //_store.dispatch(refreshAuth())
     }
     return response
   }
 }
 
 fetchIntercept.register({
-  response: refreshOn401(store),
+  //response: refreshOn401(store),
 })

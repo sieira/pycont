@@ -8,7 +8,7 @@ import { logout } from '../../store/auth/actions'
 import { PycontState } from '../../store/types'
 
 interface StateProps {
-  isAuthenticated: boolean
+  isAuthenticated: boolean | null
 }
 
 interface DispatchProps {

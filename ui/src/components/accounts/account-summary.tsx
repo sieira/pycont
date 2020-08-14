@@ -6,17 +6,19 @@ import { Form } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from 'react-bootstrap'
 import { patchAccount } from '../../store/accounts/actions'
+import { PycontState } from '../../store/types'
+import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
 interface StateProps {
   account: Account
 }
 
 interface DispatchProps {
-  patchData: () => void
+  patchData: (account: Account) => Promise<void>
 }
 
 class AccountSummary extends React.Component<StateProps & DispatchProps> {
-  constructor(props) {
+  /*constructor(props:any) {
     super(props)
 
     this.state = {
@@ -26,22 +28,23 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
     }
     this.toggleEdit = this.toggleEdit.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
+  }*/
 
   toggleEdit(): void {
-    this.setState({ isEditing: !this.state.isEditing })
+    //this.setState({ isEditing: !this.state.isEditing })
   }
 
-  handleSubmit(event: FormEvent): void {
+  handleSubmit(event: React.FormEvent): void {
     event.preventDefault()
     // Guess what has changed
     const diff = Object.keys(this.props.account).reduce(
       (obj, key) => {
         if (
-          {}.hasOwnProperty.call(this.state, key) &&
-          this.props.account[key] !== this.state[key]
+          true
+          //{}.hasOwnProperty.call(this.state, key) &&
+          //this.props.account[key] !== this.state[key]
         ) {
-          obj[key] = this.state[key]
+          //obj[key] = this.state[key]
         }
         return obj
       },
@@ -50,7 +53,7 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
     this.props.patchData(diff)
   }
 
-  renderTextbox(value, onChange): JSX.Element {
+  renderTextbox(value:string, onChange:any): JSX.Element {
     return (
       <Form.Group>
         <Form.Control type="text" value={value} onChange={onChange} />
@@ -59,7 +62,8 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
   }
 
   render(): JSX.Element {
-    return this.state.isEditing ? (
+    return <Form></Form>
+    /*return this.state.isEditing ? (
       <Form onSubmit={this.handleSubmit}>
         <Form.Row>
           {this.renderTextbox(this.state.name, (e: JSX.Element): void =>
@@ -84,7 +88,7 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
           <FontAwesomeIcon icon="pencil-alt" />
         </Button>
       </>
-    )
+    )*/
   }
 }
 

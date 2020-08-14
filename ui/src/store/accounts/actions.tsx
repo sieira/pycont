@@ -50,7 +50,7 @@ export function fetchAccounts() {
   }
 }
 
-export function patchAccount(account) {
+export function patchAccount(account: Account) {
   return async (
     dispatch: Dispatch<AccountsAction, {}, Action>
   ): Promise<void> => {
