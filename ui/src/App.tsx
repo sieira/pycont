@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Route, Router } from 'react-router-dom'
+import { Route, BrowserRouter } from 'react-router-dom'
 
 import { checkAuth } from './store/auth/actions'
 import { PycontState } from './store/types'
 
-import history from './history'
 import Pages from './routes/Pages'
 import MainNav from './components/nav'
 
@@ -23,16 +22,16 @@ const App: React.FunctionComponent<StateProps & DispatchProps> = ({
 }: StateProps & DispatchProps) => {
   React.useEffect(() => {
     checkAuthConnect()
-  }, [])
+  }, [checkAuthConnect])
 
   const app =
     isAuthenticated !== null ? (
-      <Router history={history}>
+      <BrowserRouter>
         <MainNav />
         <main>
           <Route component={Pages} />
         </main>
-      </Router>
+      </BrowserRouter>
     ) : null
 
   return <div className="App">{app}</div>

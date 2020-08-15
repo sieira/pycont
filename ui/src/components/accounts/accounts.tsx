@@ -35,7 +35,7 @@ class AccountList extends React.Component<StateProps & DispatchProps> {
             <Spinner animation="grow" variant="info" />
           ) : (
             <ListGroup>
-              {this.props.accounts.map((account) => (
+              {this.props.accounts.map((account: Account) => (
                 <ListGroup.Item key={account.id}>
                   <AccountSummary account={account} />
                 </ListGroup.Item>

@@ -14,6 +14,6 @@ upgrade-api-deps:
 
 upgrade-ui-deps:
 	@printf "Upgrading UI deps..."
-	docker-compose run -uroot pycont-ui sh -c "npm install -g npm-check-updates; ncu -u"
+	docker-compose run --rm -uroot pycont-ui sh -c "npm install -g npm-check-updates; ncu -u; npm install -g"
 	@echo [OK]
 	

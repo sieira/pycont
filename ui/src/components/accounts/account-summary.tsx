@@ -6,17 +6,19 @@ import { Form } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from 'react-bootstrap'
 import { patchAccount } from '../../store/accounts/actions'
+import { PycontState } from '../../store/types'
+import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
 interface StateProps {
   account: Account
 }
 
 interface DispatchProps {
-  patchData: () => void
+  patchData: (account: Account) => Promise<void>
 }
 
 class AccountSummary extends React.Component<StateProps & DispatchProps> {
-  constructor(props) {
+  constructor(props: any) {
     super(props)
 
     this.state = {
@@ -32,7 +34,7 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
     this.setState({ isEditing: !this.state.isEditing })
   }
 
-  handleSubmit(event: FormEvent): void {
+  handleSubmit(event: React.FormEvent): void {
     event.preventDefault()
     // Guess what has changed
     const diff = Object.keys(this.props.account).reduce(
@@ -50,7 +52,7 @@ class AccountSummary extends React.Component<StateProps & DispatchProps> {
     this.props.patchData(diff)
   }
 
-  renderTextbox(value, onChange): JSX.Element {
+  renderTextbox(value: string, onChange: any): JSX.Element {
     return (
       <Form.Group>
         <Form.Control type="text" value={value} onChange={onChange} />
