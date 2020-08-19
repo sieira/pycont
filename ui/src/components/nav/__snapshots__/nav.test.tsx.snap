@@ -8,7 +8,14 @@ exports[`renders logged in without crashing 1`] = `
     className="navbar-brand"
     href="/home"
   >
-    🍺 Pycont
+    <span
+      aria-label="beer-emoji"
+      role="img"
+    >
+      🍺
+    </span>
+     
+    Pycont
   </a>
   <div
     className="navbar-nav"
@@ -64,7 +71,14 @@ exports[`renders without crashing 1`] = `
     className="navbar-brand"
     href="/"
   >
-    🍺 Pycont
+    <span
+      aria-label="beer-emoji"
+      role="img"
+    >
+      🍺
+    </span>
+     
+    Pycont
   </a>
   <div
     className="navbar-nav"

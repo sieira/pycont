@@ -1,3 +1,5 @@
+import Cookies from 'universal-cookie'
+
 import { Action } from 'redux'
 import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
@@ -9,14 +11,26 @@ export interface Fetch {
   payload: AccountsState
 }
 
+export interface Patch {
+  type: constants.PATCH
+  payload: AccountsState
+}
+
 export function fetchData(accounts: Account[]): Fetch {
   return {
     type: constants.FETCH,
-    payload: { accountList: accounts, fetched: true }
+    payload: { accountList: accounts, fetched: true },
   }
 }
 
-export type AccountsAction = Fetch
+export function resetData(): Patch {
+  return {
+    type: constants.PATCH,
+    payload: { accountList: [], fetched: false },
+  }
+}
+
+export type AccountsAction = Fetch | Patch
 
 export function fetchAccounts() {
   return async (
@@ -26,11 +40,32 @@ export function fetchAccounts() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
-      }
-    }).then(function(response) {
-      response.json().then(data => {
+        Accept: 'application/json',
+      },
+    }).then(function (response) {
+      response.json().then((data) => {
         dispatch(fetchData(data))
+      })
+    })
+  }
+}
+
+export function patchAccount(account: Account) {
+  return async (
+    dispatch: Dispatch<AccountsAction, {}, Action>
+  ): Promise<void> => {
+    return fetch(`api/accounts/${account.id}/`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'X-CSRFToken': new Cookies().get('csrftoken'),
+      },
+      body: JSON.stringify(account),
+    }).then(function (response) {
+      response.json().then((data) => {
+        dispatch(resetData())
+        dispatch(fetchAccounts())
       })
     })
   }

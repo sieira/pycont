@@ -1,5 +1,7 @@
 export interface Account {
-  name: string
+  id: number
+  name?: string
+  balance?: number
 }
 
 export interface AccountsState {

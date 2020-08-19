@@ -9,7 +9,7 @@ it('Should reduce on authenticate', () => {
     )
   ).toEqual({
     currentUser: { username: 'Hoola Kaboola' },
-    isAuthenticated: true
+    isAuthenticated: true,
   })
 })
 

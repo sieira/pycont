@@ -8,6 +8,15 @@ import App from './App'
 import store from './store'
 import * as serviceWorker from './serviceWorker'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faTimes,
+  faCheckSquare,
+  faPencilAlt,
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(faPencilAlt, faCheckSquare, faTimes)
+
 ReactDOM.render(
   <>
     <link

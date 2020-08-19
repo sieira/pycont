@@ -1,9 +1,12 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from rest_framework.test import APITestCase
 from rest_framework.status import HTTP_401_UNAUTHORIZED, HTTP_200_OK
 
 from pycont.apps.users.serializers import UserSerializer
+
+
+User = get_user_model()
 
 
 class AuthTest(APITestCase):

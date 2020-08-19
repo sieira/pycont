@@ -8,7 +8,7 @@ export const authStateRouteFactory = (
   defaultFallbackRoute: string
 ): React.FC<AuthStateRouteProps & RouteProps> => ({
   component: Component,
-  isAuthenticated
+  isAuthenticated,
 }: AuthStateRouteProps & RouteProps): JSX.Element => {
   if (isAuthenticated !== authenticatedValue) {
     return <Redirect push to={defaultFallbackRoute} />

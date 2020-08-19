@@ -2,6 +2,12 @@
 from django.db import models
 
 
+CURRENCIES = {
+    'USD': 'United States Dollars',
+    'EUR': 'Euros',
+}
+
+
 class PycontModel(models.Model):
     """Base model for the entire application, adding created_at and last_updated_at columns."""
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Action } from 'redux'
 import { connect } from 'react-redux'
 import { ThunkDispatch as Dispatch } from 'redux-thunk'
 
@@ -7,6 +8,7 @@ import { Spinner, ListGroup } from 'react-bootstrap'
 import { PycontState } from '../../store/types'
 import { Account } from '../../store/accounts/types'
 import { fetchAccounts } from '../../store/accounts/actions'
+import AccountSummary from './account-summary'
 
 interface StateProps {
   accounts: Account[]
@@ -24,7 +26,7 @@ class AccountList extends React.Component<StateProps & DispatchProps> {
     }
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <>
         <h2>Accounts</h2>
@@ -33,8 +35,10 @@ class AccountList extends React.Component<StateProps & DispatchProps> {
             <Spinner animation="grow" variant="info" />
           ) : (
             <ListGroup>
-              {this.props.accounts.map(account => (
-                <ListGroup.Item key={account.id}>{account.name}</ListGroup.Item>
+              {this.props.accounts.map((account: Account) => (
+                <ListGroup.Item key={account.id}>
+                  <AccountSummary account={account} />
+                </ListGroup.Item>
               ))}
             </ListGroup>
           )}
@@ -46,13 +50,13 @@ class AccountList extends React.Component<StateProps & DispatchProps> {
 
 const mapStateToProps = (state: PycontState): StateProps => ({
   accounts: state.accounts.accountList,
-  fetched: state.accounts.fetched
+  fetched: state.accounts.fetched,
 })
 
 const mapDispatchToProps = (
-  dispatch: Dispatch<PycontState, any, any>
+  dispatch: Dispatch<PycontState, {}, Action>
 ): DispatchProps => ({
-  fetchData: () => dispatch(fetchAccounts())
+  fetchData: (): Promise<void> => dispatch(fetchAccounts()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountList)

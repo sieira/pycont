@@ -5,6 +5,7 @@ exports[`should render without crashing 1`] = `
   className="Login"
 >
   <form
+    className=""
     onSubmit={[Function]}
   >
     <div

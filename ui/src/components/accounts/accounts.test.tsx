@@ -12,8 +12,8 @@ describe('Accounts tests', () => {
     const accounts = createWithProvider(<AccountList />, {
       accounts: {
         accountList: [{ name: 'Account1' }, { name: 'Account2' }],
-        fetched: true
-      }
+        fetched: true,
+      },
     })
     expect(accounts).toMatchSnapshot()
   })
@@ -23,8 +23,8 @@ describe('Accounts tests', () => {
     const accounts = createWithProvider(<AccountList />, {
       accounts: {
         accountList: undefined,
-        fetched: false
-      }
+        fetched: false,
+      },
     })
     expect(accounts).toMatchSnapshot()
   })

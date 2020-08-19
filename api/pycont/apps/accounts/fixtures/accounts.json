@@ -6,7 +6,9 @@
         "created_at": "2019-11-23T17:31:35.352Z",
         "last_updated_at": "2019-11-23T17:31:35.352Z",
         "name": "Million dollars account",
-        "user": 2
+        "user": 2,
+        "currency": "USD",
+        "balance": 1000000
     }
 },
 {
@@ -16,7 +18,9 @@
         "created_at": "2019-11-23T17:31:35.352Z",
         "last_updated_at": "2019-11-23T17:31:35.352Z",
         "name": "Poor guys account",
-        "user": 2
+        "user": 2,
+        "currency": "EUR",
+        "balance": -747.68
     }
 }
 ]

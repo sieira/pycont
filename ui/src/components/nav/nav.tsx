@@ -8,7 +8,7 @@ import { logout } from '../../store/auth/actions'
 import { PycontState } from '../../store/types'
 
 interface StateProps {
-  isAuthenticated: boolean
+  isAuthenticated: boolean | null
 }
 
 interface DispatchProps {
@@ -17,7 +17,7 @@ interface DispatchProps {
 
 const MainNav: React.FunctionComponent<StateProps & DispatchProps> = ({
   isAuthenticated,
-  logoutConnect
+  logoutConnect,
 }: StateProps & DispatchProps) => {
   const brandLinkHref = isAuthenticated ? '/home' : '/'
 
@@ -41,7 +41,12 @@ const MainNav: React.FunctionComponent<StateProps & DispatchProps> = ({
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href={brandLinkHref}>🍺 Pycont</Navbar.Brand>
+      <Navbar.Brand href={brandLinkHref}>
+        <span role="img" aria-label="beer-emoji">
+          🍺
+        </span>{' '}
+        Pycont
+      </Navbar.Brand>
       <Nav>
         {mainLinks}
         <LinkContainer to="/terms">
@@ -56,7 +61,7 @@ const MainNav: React.FunctionComponent<StateProps & DispatchProps> = ({
 }
 
 const mapStateToProps = (state: PycontState): StateProps => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
 })
 
 const mapDispatchToProps = { logoutConnect: logout }
